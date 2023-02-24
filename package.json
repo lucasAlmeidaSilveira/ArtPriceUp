@@ -1,4 +1,6 @@
 {
+  "name": "Automation Puppeteer",
+  "type": "module",
   "dependencies": {
     "puppeteer": "^19.7.2"
   }

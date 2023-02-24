@@ -1,4 +1,5 @@
-const puppeteer = require('puppeteer');
+import puppeteer from 'puppeteer';
+import { initPuppeteer } from './config.js';
 
 async function login(page){
   /* Dados de acesso */
@@ -12,18 +13,15 @@ async function login(page){
 }
 
 (async () => {
-  const browser = await puppeteer.launch({
-    userDataDir: 'C:/Users/lucas/AppData/Local/Google/Chrome/User Data',
-  });
+  const page = await initPuppeteer(puppeteer);
 
-  const page = await browser.newPage();
   await page.goto(
     'https://www.outletdosquadros.com.br/painel/login?id=MWQ3bTZnOThxYnVmdXZxNmdycTQ4YmtjYjQ%3D',
   );
 
   page.url() !== 'https://www.outletdosquadros.com.br/painel' ? await login(page) : ''
 
-  console.log(page.url());
+  await page.goto('https://www.outletdosquadros.com.br/painel/catalogo/produtos/index')
 
   await page.screenshot({ path: 'screenshot.png' });
   await browser.close();
