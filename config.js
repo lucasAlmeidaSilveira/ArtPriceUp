@@ -13,7 +13,7 @@ async function initPuppeteer(puppeteer) {
 
   await page.setViewport(configPage);
 
-  return page;
+  return {page, browser};
 }
 
 export { initPuppeteer };
