@@ -52,7 +52,7 @@ async function login(page) {
         ? 'Excesso de requisições'
         : err.message;
     console.log(error);
+    await browser.close();
   }
 
-  await browser.close();
 })();
