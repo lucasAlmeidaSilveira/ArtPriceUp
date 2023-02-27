@@ -1,9 +1,10 @@
 async function initPuppeteer(puppeteer) {
   const browser = await puppeteer.launch({
     headless: false,
-    args: ['--start-fullscreen'],
+    args: ['--start-maximized'],
   });
   const page = await browser.newPage();
+  await page.waitForTimeout(1000);
 
   const displaySize = await page.evaluate(() => {
     return {

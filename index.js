@@ -1,8 +1,8 @@
 import puppeteer from 'puppeteer';
 import dotenv from 'dotenv';
-import { initPuppeteer } from './config.js';
+import { initPuppeteer } from './src/config.js';
 import { updateInputValue } from './src/controllers/updatePrice.js';
-import { click } from './src/controllers/tools.js'
+import { click } from './src/controllers/tools.js';
 dotenv.config();
 
 async function login(page) {
@@ -18,6 +18,7 @@ async function login(page) {
 
 (async () => {
   const { page } = await initPuppeteer(puppeteer);
+  const URLpage = 'https://www.outletdosquadros.com.br/painel/catalogo/produtos/edit/698' 
 
   await page.goto('https://www.outletdosquadros.com.br/painel');
 
@@ -25,18 +26,25 @@ async function login(page) {
     ? await login(page)
     : '';
 
-  await page.goto(
-    'https://www.outletdosquadros.com.br/painel/catalogo/produtos/edit/618',
-  );
+  await page.goto(URLpage);
 
   //Clique na tab variações
   await page.click('a#ui-id-6');
 
-  const btn = '[title="Editar"]';
+  let contador = 1;
+  while (contador <= 18) {
+    let element = `table.tabela-variacoes tr:nth-child(${contador}) a[title="Editar"]`;
+    await click(element, page);
+    await updateInputValue(page);
 
-  await click(btn, page);
+    contador += 1;
+  }
 
-  updateInputValue(page);
+  const btnSaveData = 'button[type="submit"]';
+  const btnUpdateVitrine = 'div.warning > a.btn.btn-double-click';
 
-  // await browser.close();
+  await click(btnSaveData, page)
+  await click(btnUpdateVitrine, page)
+
+  await browser.close();
 })();

@@ -1,6 +1,6 @@
-async function click(btn, page) {
-  await page.waitForSelector(btn);
-  await page.click(btn);
+async function click(element, page) {
+  await page.waitForSelector(element);
+  await page.click(element);
 }
 
 export { click };
