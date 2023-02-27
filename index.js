@@ -18,7 +18,7 @@ async function login(page) {
 
 (async () => {
   const { page } = await initPuppeteer(puppeteer);
-  const URLpage = 'https://www.outletdosquadros.com.br/painel/catalogo/produtos/edit/698' 
+  const URLpage = 'https://www.outletdosquadros.com.br/painel/catalogo/produtos/edit/700' 
 
   await page.goto('https://www.outletdosquadros.com.br/painel');
 
@@ -39,12 +39,6 @@ async function login(page) {
 
     contador += 1;
   }
-
-  const btnSaveData = 'button[type="submit"]';
-  const btnUpdateVitrine = 'div.warning > a.btn.btn-double-click';
-
-  await click(btnSaveData, page)
-  await click(btnUpdateVitrine, page)
 
   await browser.close();
 })();
