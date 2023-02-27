@@ -67,6 +67,16 @@ async function updateInputValue(page) {
   const sizeP = '30cm x 45cm';
   const sizeM = '40cm x 60cm';
   const sizeG = '60cm x 90cm';
+  const valuesMirror = {
+    valueP: '227,14',
+    valueM: '355,71',
+    valueG: '727,14',
+  }
+  const valuesNoMirror = {
+    valueP: '155,71',
+    valueM: '255,71',
+    valueG: '512,86',
+  }
 
   // Espera até que o seletor da tag <a> esteja disponível na página
   await page.waitForSelector(inputSize);
@@ -81,20 +91,20 @@ async function updateInputValue(page) {
 
   if (valueInputMaterial === 'Quadro com vidro') {
     if (valueInputSize === sizeP) {
-      await page.$eval(inputValue, input => (input.value = '227,14'));
+      await page.$eval(inputValue, input => (input.value = valuesMirror.valueP));
       await updateValueDefault(page);
 
       // Clica no botão Salvar variação
 
       await click(btnSubmit, page);
     } else if (valueInputSize === sizeM) {
-      await page.$eval(inputValue, input => (input.value = '355,71'));
+      await page.$eval(inputValue, input => (input.value = valuesMirror.valueM));
       await updateValueDefault(page);
 
       // Clica no botão Salvar variação
       await click(btnSubmit, page);
     } else if (valueInputSize === sizeG) {
-      await page.$eval(inputValue, input => (input.value = '727,14'));
+      await page.$eval(inputValue, input => (input.value = valuesMirror.valueG));
       await updateValueDefault(page);
 
       // Clica no botão Salvar variação
@@ -104,20 +114,20 @@ async function updateInputValue(page) {
 
   if (valueInputMaterial === 'Quadro sem vidro') {
     if (valueInputSize === sizeP) {
-      await page.$eval(inputValue, input => (input.value = '155,71'));
+      await page.$eval(inputValue, input => (input.value = valuesNoMirror.valueP));
       await updateValueDefault(page);
 
       // Clica no botão Salvar variação
 
       await click(btnSubmit, page);
     } else if (valueInputSize === sizeM) {
-      await page.$eval(inputValue, input => (input.value = '255,71'));
+      await page.$eval(inputValue, input => (input.value = valuesNoMirror.valueM));
       await updateValueDefault(page);
 
       // Clica no botão Salvar variação
       await click(btnSubmit, page);
     } else if (valueInputSize === sizeG) {
-      await page.$eval(inputValue, input => (input.value = '512,86'));
+      await page.$eval(inputValue, input => (input.value = valuesNoMirror.valueG));
       await updateValueDefault(page);
 
       // Clica no botão Salvar variação

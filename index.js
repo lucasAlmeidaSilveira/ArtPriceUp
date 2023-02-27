@@ -18,8 +18,9 @@ async function login(page) {
 
 (async () => {
   const { page, browser } = await initPuppeteer(puppeteer);
-  const URLpage = 'https://www.outletdosquadros.com.br/painel/catalogo/produtos/edit/701' 
-  const btnVariacoes = 'a#ui-id-6'
+  const URLpage = process.env.URLPAGE;
+  const btnVariacoes = 'a#ui-id-6';
+  let contador = 1;
 
   await page.goto('https://www.outletdosquadros.com.br/painel');
 
@@ -27,18 +28,29 @@ async function login(page) {
     ? await login(page)
     : '';
 
-  await page.goto(URLpage);
+  try {
+    while (true) {
+      page.waitForNavigation();
+      if (page.url().includes('edit')) {
+        //Clique na tab variações
+        await page.click(btnVariacoes);
 
-  //Clique na tab variações
-  await page.click(btnVariacoes);
+        contador = 1;
+        while (contador <= 18) {
+          let element = `table.tabela-variacoes tr:nth-child(${contador}) a[title="Editar"]`;
+          await click(element, page);
+          await updateInputValue(page);
 
-  let contador = 1;
-  while (contador <= 18) {
-    let element = `table.tabela-variacoes tr:nth-child(${contador}) a[title="Editar"]`;
-    await click(element, page);
-    await updateInputValue(page);
-
-    contador += 1;
+          contador += 1;
+        }
+      }
+    }
+  } catch (err) {
+    const error =
+      err.message === 'No element found for selector: a#ui-id-6'
+        ? 'Excesso de requisições'
+        : err.message;
+    console.log(error);
   }
 
   await browser.close();
