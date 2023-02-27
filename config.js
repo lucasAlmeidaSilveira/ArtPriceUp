@@ -1,9 +1,3 @@
-const configPage = {
-  width: 1920,
-  height: 1080,
-  deviceScaleFactor: 1,
-};
-
 async function initPuppeteer(puppeteer) {
   const browser = await puppeteer.launch({
     headless: false,
@@ -11,9 +5,17 @@ async function initPuppeteer(puppeteer) {
   });
   const page = await browser.newPage();
 
-  await page.setViewport(configPage);
+  const displaySize = await page.evaluate(() => {
+    return {
+      width: window.screen.width,
+      height: window.screen.height,
+      deviceScaleFactor: 1,
+    };
+  });
 
-  return {page, browser};
+  await page.setViewport(displaySize);
+
+  return { page, browser };
 }
 
 export { initPuppeteer };

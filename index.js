@@ -29,6 +29,5 @@ async function login(page) {
     'https://www.outletdosquadros.com.br/painel/catalogo/produtos/index',
   );
 
-  await page.screenshot({ path: 'screenshot.png' });
   await browser.close();
 })();
