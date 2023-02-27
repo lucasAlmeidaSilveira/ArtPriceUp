@@ -17,8 +17,9 @@ async function login(page) {
 }
 
 (async () => {
-  const { page } = await initPuppeteer(puppeteer);
-  const URLpage = 'https://www.outletdosquadros.com.br/painel/catalogo/produtos/edit/700' 
+  const { page, browser } = await initPuppeteer(puppeteer);
+  const URLpage = 'https://www.outletdosquadros.com.br/painel/catalogo/produtos/edit/701' 
+  const btnVariacoes = 'a#ui-id-6'
 
   await page.goto('https://www.outletdosquadros.com.br/painel');
 
@@ -29,7 +30,7 @@ async function login(page) {
   await page.goto(URLpage);
 
   //Clique na tab variações
-  await page.click('a#ui-id-6');
+  await page.click(btnVariacoes);
 
   let contador = 1;
   while (contador <= 18) {
