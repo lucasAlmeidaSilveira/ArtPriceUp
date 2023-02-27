@@ -30,19 +30,20 @@ async function login(page) {
 
   try {
     while (true) {
-      page.waitForNavigation();
-      if (page.url().includes('edit')) {
-        //Clique na tab variações
-        await page.click(btnVariacoes);
+      await Promise.all([
+        page.waitForNavigation({ waitUntil: 'networkidle0' }),
+        page.waitForResponse(response => response.url().includes('edit')),
+      ]);
+      //Clique na tab variações
+      await page.click(btnVariacoes);
 
-        contador = 1;
-        while (contador <= 18) {
-          let element = `table.tabela-variacoes tr:nth-child(${contador}) a[title="Editar"]`;
-          await click(element, page);
-          await updateInputValue(page);
+      contador = 1;
+      while (contador <= 18) {
+        let element = `table.tabela-variacoes tr:nth-child(${contador}) a[title="Editar"]`;
+        await click(element, page);
+        await updateInputValue(page);
 
-          contador += 1;
-        }
+        contador += 1;
       }
     }
   } catch (err) {
