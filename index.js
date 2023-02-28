@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer';
 import dotenv from 'dotenv';
 import { initPuppeteer } from './src/config.js';
 import { updateInputValue } from './src/controllers/updatePrice.js';
-import { click } from './src/controllers/tools.js';
+import { click, waitForURL } from './src/controllers/tools.js';
 dotenv.config();
 
 async function login(page) {
@@ -18,28 +18,24 @@ async function login(page) {
 
 (async () => {
   const { page, browser } = await initPuppeteer(puppeteer);
-  const URLpage = process.env.URLPAGE;
+  const URLpainel = process.env.URLPAINEL;
+  const URLproducts = process.env.URLPRODUTOS;
   const btnVariacoes = 'a#ui-id-6';
   let contador = 1;
 
-  await page.goto('https://www.outletdosquadros.com.br/painel');
+  await page.goto(URLpainel);
 
-  (await page.url()) !== 'https://www.outletdosquadros.com.br/painel'
-    ? await login(page)
-    : '';
+  (await page.url()) !== URLpainel ? await login(page) : '';
 
   try {
-    let isActive = true;
-    while (isActive) {
-      await Promise.all([
-        page.waitForNavigation({ waitUntil: 'networkidle0' }),
-        await page.waitForResponse(response => response.url().includes('edit')),
-        (isActive = true),
-      ]);
+    while (true) {
+      await waitForURL(page, 'edit');
+
+      // Tempo de atraso para carregamento da página
+      await new Promise(resolve => setTimeout(resolve, 2000));
       //Clique na tab variações
       await page.click(btnVariacoes);
 
-      contador = 1;
       while (contador <= 18) {
         let element = `table.tabela-variacoes tr:nth-child(${contador}) a[title="Editar"]`;
         await click(element, page);
@@ -47,7 +43,8 @@ async function login(page) {
 
         contador += 1;
       }
-      isActive = false;
+      contador = 1
+      await page.goto(URLproducts)
     }
   } catch (err) {
     const error =
