@@ -91,20 +91,20 @@ async function updateInputValue(page) {
 
   if (valueInputMaterial === 'Quadro com vidro') {
     if (valueInputSize === sizeP) {
-      await page.$eval(inputValue, input => (input.value = valuesMirror.valueP));
+      await page.$eval(inputValue, input => (input.value = '227,14'));
       await updateValueDefault(page);
 
       // Clica no botão Salvar variação
 
       await click(btnSubmit, page);
     } else if (valueInputSize === sizeM) {
-      await page.$eval(inputValue, input => (input.value = valuesMirror.valueM));
+      await page.$eval(inputValue, input => (input.value = '355,71'));
       await updateValueDefault(page);
 
       // Clica no botão Salvar variação
       await click(btnSubmit, page);
     } else if (valueInputSize === sizeG) {
-      await page.$eval(inputValue, input => (input.value = valuesMirror.valueG));
+      await page.$eval(inputValue, input => (input.value = '727,14'));
       await updateValueDefault(page);
 
       // Clica no botão Salvar variação
@@ -114,20 +114,20 @@ async function updateInputValue(page) {
 
   if (valueInputMaterial === 'Quadro sem vidro') {
     if (valueInputSize === sizeP) {
-      await page.$eval(inputValue, input => (input.value = valuesNoMirror.valueP));
+      await page.$eval(inputValue, input => (input.value = '155,71'));
       await updateValueDefault(page);
 
       // Clica no botão Salvar variação
 
       await click(btnSubmit, page);
     } else if (valueInputSize === sizeM) {
-      await page.$eval(inputValue, input => (input.value = valuesNoMirror.valueM));
+      await page.$eval(inputValue, input => (input.value = '255,71'));
       await updateValueDefault(page);
 
       // Clica no botão Salvar variação
       await click(btnSubmit, page);
     } else if (valueInputSize === sizeG) {
-      await page.$eval(inputValue, input => (input.value = valuesNoMirror.valueG));
+      await page.$eval(inputValue, input => (input.value = '512,86'));
       await updateValueDefault(page);
 
       // Clica no botão Salvar variação

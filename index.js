@@ -29,10 +29,12 @@ async function login(page) {
     : '';
 
   try {
-    while (true) {
+    let isActive = true;
+    while (isActive) {
       await Promise.all([
         page.waitForNavigation({ waitUntil: 'networkidle0' }),
-        page.waitForResponse(response => response.url().includes('edit')),
+        await page.waitForResponse(response => response.url().includes('edit')),
+        (isActive = true),
       ]);
       //Clique na tab variações
       await page.click(btnVariacoes);
@@ -45,6 +47,7 @@ async function login(page) {
 
         contador += 1;
       }
+      isActive = false;
     }
   } catch (err) {
     const error =
@@ -54,5 +57,4 @@ async function login(page) {
     console.log(error);
     await browser.close();
   }
-
 })();

@@ -3,7 +3,9 @@ async function initPuppeteer(puppeteer) {
     headless: false,
     args: ['--start-maximized'],
   });
-  const page = await browser.newPage();
+  const page = await browser.newPage({
+    timeout: 0,
+  });
 
   const displaySize = await page.evaluate(() => {
     return {
