@@ -17,4 +17,9 @@ async function waitForURL(page, urlPart) {
   throw new Error(`Timeout: URL contendo ${urlPart} não foi encontrada`);
 }
 
-export { click, waitForURL };
+function getNumberEnd(str) {
+  const match = str.match(/\d+$/);
+  return match ? parseInt(match[0]) : null;
+}
+
+export { click, waitForURL, getNumberEnd };
