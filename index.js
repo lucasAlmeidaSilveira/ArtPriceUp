@@ -34,7 +34,7 @@ async function login(page) {
       await waitForURL(page, 'edit');
 
       // Recuperando a quantidade de quadros pelo SKU
-      skuProduct = await page.$eval('#ProdutoSku', input => input.value);
+      skuProduct = await page.$eval('#ProdutoSku' || '.stock-sku', input => input.value);
       numberFrames = getNumberEnd(skuProduct);
 
       // Tempo de atraso para carregamento da página

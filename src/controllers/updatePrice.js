@@ -232,8 +232,6 @@ async function updateInputValue(page, numberFrames) {
       }
     }
   }
-
-
 }
 
 export { updateInputValue };
