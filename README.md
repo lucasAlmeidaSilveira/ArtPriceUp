@@ -28,7 +28,7 @@ Esse projeto foi desenvolvido usando as seguintes tecnologias:
 Clone o projeto e acesse a pasta
 
 ```bash
-$ git clone https://github.com/lucasAlmeidaSilveira/Automation-Puppeteer
+$ git clone https://github.com/lucasAlmeidaSilveira/ArtPriceUp
 ```
 
 Siga os passos abaixo
