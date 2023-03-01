@@ -1,5 +1,5 @@
 {
-  "name": "Automation Puppeteer",
+  "name": "ArtPriceUp",
   "type": "module",
   "dependencies": {
     "dotenv": "^16.0.3",
