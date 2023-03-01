@@ -38,7 +38,7 @@ async function login(page) {
       numberFrames = getNumberEnd(skuProduct);
 
       // Tempo de atraso para carregamento da página
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise(resolve => setTimeout(resolve, 1000));
       //Clique na tab variações
       await page.click(btnVariacoes);
 
