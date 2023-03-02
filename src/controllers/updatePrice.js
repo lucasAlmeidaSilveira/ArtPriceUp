@@ -9,7 +9,6 @@ const selectInputPercentual = '#ProdutoEstoquePercentualPromocao';
 
 async function solutionBug(page){
     const resultPercentual = await page.$eval(selectResultPercentual, input => input.value);
-    console.log(typeof resultPercentual, resultPercentual);
     while (resultPercentual === '0,00' || resultPercentual.length >= 7){
       await page.focus(selectInputPercentual);
       await page.keyboard.type('25');

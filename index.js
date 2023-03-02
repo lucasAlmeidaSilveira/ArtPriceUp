@@ -37,8 +37,8 @@ async function login(page) {
       await page.click(btnVariacoes);
 
       while (contador <= 18) {
-        let btnEdit = `table.tabela-variacoes tr:nth-child(${contador}) a[title="Editar"]`;
-        await click(btnEdit, page);
+        let selectBtnEdit = `table.tabela-variacoes tr:nth-child(${contador}) a[title="Editar"]`;
+        await click(selectBtnEdit, page);
         await updateInputValue(page);
 
         contador += 1;
