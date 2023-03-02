@@ -22,8 +22,6 @@ async function login(page) {
   const URLproducts = process.env.URLPRODUTOS;
   const btnVariacoes = 'a#ui-id-6';
   let contador = 1;
-  let numberFrames;
-  let skuProduct;
 
   await page.goto(URLpainel);
 
@@ -33,10 +31,6 @@ async function login(page) {
     while (true) {
       await waitForURL(page, 'edit');
 
-      // Recuperando a quantidade de quadros pelo SKU
-      skuProduct = await page.$eval('#ProdutoSku' || '.stock-sku', input => input.value);
-      numberFrames = getNumberEnd(skuProduct);
-
       // Tempo de atraso para carregamento da página
       await new Promise(resolve => setTimeout(resolve, 1000));
       //Clique na tab variações
@@ -45,7 +39,7 @@ async function login(page) {
       while (contador <= 18) {
         let btnEdit = `table.tabela-variacoes tr:nth-child(${contador}) a[title="Editar"]`;
         await click(btnEdit, page);
-        await updateInputValue(page, numberFrames);
+        await updateInputValue(page);
 
         contador += 1;
       }
