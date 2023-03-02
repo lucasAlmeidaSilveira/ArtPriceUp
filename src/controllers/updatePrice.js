@@ -4,19 +4,16 @@ const selectInputValue = 'input#ProdutoEstoqueValorVenda';
 const selectBtnSubmit = 'button.btn.btn-icon.btn-submit';
 const selectInputInitPromo = '#ProdutoEstoquePromocaoDataInicio';
 const selectInputEndPromo = '#ProdutoEstoquePromocaoDataFim';
-const selectResultPercentual = '#ProdutoEstoqueValorPromocao'
+const selectResultPercentual = '#ProdutoEstoqueValorPromocao';
 const selectInputPercentual = '#ProdutoEstoquePercentualPromocao';
 
-async function solutionBug(page){
-    const resultPercentual = await page.$eval(selectResultPercentual, input => input.value);
-    while (resultPercentual === '0,00' || resultPercentual.length >= 7){
-      await page.focus(selectInputPercentual);
-      await page.keyboard.type('25');
-      await page.keyboard.press('Tab');
-      await page.focus(selectInputPercentual);
-      await page.keyboard.type('30');
-      await page.keyboard.press('Tab');
-    }
+async function solutionBug(page) {
+  await page.focus(selectInputPercentual);
+  await page.keyboard.type('25');
+  await page.keyboard.press('Tab');
+  await page.focus(selectInputPercentual);
+  await page.keyboard.type('30');
+  await page.keyboard.press('Tab');
 }
 
 async function updateValueDefault(page, checkBoxPromo) {
@@ -44,7 +41,10 @@ async function updateInputValue(page) {
     // Recupera o valor do input do preço
     const value = await page.$eval(selectInputValue, input => input.value);
     // Realiza a conta da valor maior com 30% off
-    const newValue = (parseFloat(value) / 0.7).toFixed(2).toString().replace(".", ",");
+    const newValue = (parseFloat(value) / 0.7)
+      .toFixed(2)
+      .toString()
+      .replace('.', ',');
     // Faz a atribuição do novo valor no input
     await page.$eval(
       selectInputValue,
@@ -55,7 +55,7 @@ async function updateInputValue(page) {
     await updateValueDefault(page, checkBoxPromo);
   }
 
-  await solutionBug(page)
+  await solutionBug(page);
 
   // Salva as configurações
   await click(selectBtnSubmit, page);
