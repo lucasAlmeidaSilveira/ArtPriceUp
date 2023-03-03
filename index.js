@@ -42,6 +42,10 @@ async function login(page) {
         await updateInputValue(page);
 
         contador += 1;
+
+        if(page.url() === process.env.URLPRODUTOS) {
+          contador = 19;
+        }
       }
       contador = 1;
       await page.goto(URLproducts);
