@@ -34,17 +34,20 @@ async function login(page) {
       // Tempo de atraso para carregamento da página
       await new Promise(resolve => setTimeout(resolve, 1000));
       //Clique na tab variações
+      await page.waitForSelector(btnVariacoes);
       await page.click(btnVariacoes);
 
       while (contador <= 18) {
         let selectBtnEdit = `table.tabela-variacoes tr:nth-child(${contador}) a[title="Editar"]`;
-        await click(selectBtnEdit, page);
-        await updateInputValue(page);
+        if (selectBtnEdit) {
+          await click(selectBtnEdit, page);
+          await updateInputValue(page);
 
-        contador += 1;
+          contador += 1;
+        }
 
-        if(page.url() === process.env.URLPRODUTOS) {
-          contador = 19;
+        if (page.url() === URLproducts) {
+          break;
         }
       }
       contador = 1;
