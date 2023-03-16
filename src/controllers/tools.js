@@ -1,6 +1,6 @@
-async function click(element, page) {
-  await page.waitForSelector(element);
-  await page.click(element);
+async function click(selectorElement, page) {
+  await page.waitForSelector(selectorElement);
+  await page.click(selectorElement);
 }
 
 async function waitForURL(page, urlPart) {
