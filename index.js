@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer"
 import dotenv from "dotenv"
 import { initPuppeteer } from "./src/config.js"
-import { changeValue, click, waitForURL } from "./src/controllers/tools.js"
+import { changeValues, click, waitForURL } from "./src/controllers/tools.js"
 
 dotenv.config()
 
@@ -40,7 +40,7 @@ async function login(page) {
 		// Clique na tab variações
 		await click(btnVariacoes, page)
 
-		await changeValue(page, amountFrames)
+		await changeValues(page, amountFrames)
 
 		// while (contador <= 18) {
 		//   let selectBtnEdit = `table.tabela-variacoes tr:nth-child(${contador}) a[title="Editar"]`;
