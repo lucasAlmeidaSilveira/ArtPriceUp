@@ -31,10 +31,16 @@ async function login(page) {
 
 		// Tempo de atraso para carregamento da página
 		await new Promise((resolve) => setTimeout(resolve, 1000))
+
+		// Recuperando quantidade de quadros
+		const selectInputSKU = "input#ProdutoSku"
+		const productSKU = await page.$eval(selectInputSKU, (input) => input.value)
+		const amountFrames = productSKU.slice(-1)
+
 		// Clique na tab variações
 		await click(btnVariacoes, page)
 
-		await changeValue(page)
+		await changeValue(page, amountFrames)
 
 		// while (contador <= 18) {
 		//   let selectBtnEdit = `table.tabela-variacoes tr:nth-child(${contador}) a[title="Editar"]`;

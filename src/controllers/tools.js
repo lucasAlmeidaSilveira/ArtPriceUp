@@ -1,3 +1,5 @@
+import { sizeG, sizeGG, sizeM, sizeP } from "../db/pricesFrames.js"
+
 export async function click(selectorElement, page) {
 	await page.waitForSelector(selectorElement)
 	await page.click(selectorElement)
@@ -22,25 +24,45 @@ export function getNumberEnd(str) {
 	return match ? parseInt(match[0]) : null
 }
 
-export async function changeValue(page){
+async function updateValueSize(size, sizeFrame, materialFrame, selectorInputValue, amountFrames, row) {
+	if(sizeFrame === size.size && materialFrame === size.material[0].type){
+		await row.$eval(
+			selectorInputValue,
+			(input, valor) => (input.value = valor),
+			size.material[0].variations[amountFrames - 1].value,
+		)
+	}
+	
+	if(sizeFrame === size.size && materialFrame === size.material[1].type){
+		await row.$eval(
+			selectorInputValue,
+			(input, valor) => (input.value = valor),
+			size.material[1].variations[amountFrames - 1].value,
+		)
+	}
+		
+	if(sizeFrame === size.size && materialFrame === size.material[2].type){
+		await row.$eval(
+			selectorInputValue,
+			(input, valor) => (input.value = valor),
+			size.material[2].variations[amountFrames - 1].value,
+		)
+	}
+}
+
+export async function changeValue(page, amountFrames){
 	const table = await page.$("table.tabela-variacoes")
 	const rows = await table.$$("tbody tr")
 
 	rows.forEach(async (row) => {
 		const selectorInputValue = "td:nth-child(8) input"
 		const sizeFrame = await row.$eval("td:nth-child(3)", (td) => td.textContent.trim())
+		const materialFrame = await row.$eval("td:nth-child(2)", (td) => td.textContent.trim())
 
-		switch (sizeFrame) {
-		case "30cm x 45cm":
-			await row.$eval(
-				selectorInputValue,
-				(input, valor) => (input.value = valor),
-				"99,00",
-			)
-			break
-		
-		default:
-			break
-		}
+		updateValueSize(sizeP, sizeFrame, materialFrame, selectorInputValue, amountFrames, row)
+		updateValueSize(sizeM, sizeFrame, materialFrame, selectorInputValue, amountFrames, row)
+		updateValueSize(sizeG, sizeFrame, materialFrame, selectorInputValue, amountFrames, row)
+		updateValueSize(sizeGG, sizeFrame, materialFrame, selectorInputValue, amountFrames, row)
 	}) 
 }
+
