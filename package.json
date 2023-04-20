@@ -1,8 +1,17 @@
 {
   "name": "ArtPriceUp",
   "type": "module",
+  "scripts": {
+    "dev": "node index.js"
+  },
   "dependencies": {
     "dotenv": "^16.0.3",
     "puppeteer": "^19.7.2"
+  },
+  "devDependencies": {
+    "@rocketseat/eslint-config": "^1.2.0",
+    "eslint": "^8.38.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5"
   }
 }
