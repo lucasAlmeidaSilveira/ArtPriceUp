@@ -29,7 +29,7 @@ async function updateValueSize(size, sizeFrame, materialFrame, selectorInputValu
 		await row.$eval(
 			selectorInputValue,
 			(input, valor) => (input.value = valor),
-			size.material[0].variations[amountFrames - 1].value,
+			size.material[0].variations[amountFrames - 1].value
 		)
 	}
 	
@@ -37,7 +37,7 @@ async function updateValueSize(size, sizeFrame, materialFrame, selectorInputValu
 		await row.$eval(
 			selectorInputValue,
 			(input, valor) => (input.value = valor),
-			size.material[1].variations[amountFrames - 1].value,
+			size.material[1].variations[amountFrames - 1].value
 		)
 	}
 		
@@ -45,7 +45,7 @@ async function updateValueSize(size, sizeFrame, materialFrame, selectorInputValu
 		await row.$eval(
 			selectorInputValue,
 			(input, valor) => (input.value = valor),
-			size.material[2].variations[amountFrames - 1].value,
+			size.material[2].variations[amountFrames - 1].value
 		)
 	}
 }

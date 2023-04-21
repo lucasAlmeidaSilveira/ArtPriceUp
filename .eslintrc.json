@@ -23,6 +23,16 @@
         "semi": [
             "warn",
             "never"
+        ],
+        "camelcase": [
+            "warn"
+        ],
+        "arrow-parens": "warn",
+        "arrow-spacing": "warn",
+        "brace-style": "warn",
+        "comma-dangle": [
+            "error", 
+            "never"
         ]
     }
 }
