@@ -25,10 +25,8 @@ async function updateValueDefault(page, checkBoxPromo) {
 	await page.keyboard.press("Tab")
 
 	// Atualiza valor data de inicio da promoção
-	await page.$eval(
-		selectInputInitPromo,
-		(input) => (input.value = "23/02/2023"),
-	)
+	await page.$eval(selectInputInitPromo,
+		(input) => (input.value = "23/02/2023"))
 
 	// Atualiza valor data de fim da promoção
 	await page.$eval(selectInputEndPromo, (input) => (input.value = "01/01/2024"))
@@ -48,11 +46,9 @@ async function updateInputValue(page) {
 			.toString()
 			.replace(".", ",")
 		// Faz a atribuição do novo valor no input
-		await page.$eval(
-			selectInputValue,
+		await page.$eval(selectInputValue,
 			(input, valor) => (input.value = valor),
-			newValue,
-		)
+			newValue)
 		// Realiza a configuração da promoção
 		await updateValueDefault(page, checkBoxPromo)
 	}

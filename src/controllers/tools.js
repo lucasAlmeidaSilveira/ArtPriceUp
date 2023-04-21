@@ -24,46 +24,76 @@ export function getNumberEnd(str) {
 	return match ? parseInt(match[0]) : null
 }
 
-async function updateValueSize(size, sizeFrame, materialFrame, selectorInputValue, amountFrames, row) {
-	if(sizeFrame === size.size && materialFrame === size.material[0].type){
-		await row.$eval(
-			selectorInputValue,
+async function updateValueSize(
+	size,
+	sizeFrame,
+	materialFrame,
+	selectorInputValue,
+	amountFrames,
+	row
+) {
+	if (sizeFrame === size.size && materialFrame === size.material[0].type) {
+		await row.$eval(selectorInputValue,
 			(input, valor) => (input.value = valor),
-			size.material[0].variations[amountFrames - 1].value
-		)
+			size.material[0].variations[amountFrames - 1].value)
 	}
-	
-	if(sizeFrame === size.size && materialFrame === size.material[1].type){
-		await row.$eval(
-			selectorInputValue,
+
+	if (sizeFrame === size.size && materialFrame === size.material[1].type) {
+		await row.$eval(selectorInputValue,
 			(input, valor) => (input.value = valor),
-			size.material[1].variations[amountFrames - 1].value
-		)
+			size.material[1].variations[amountFrames - 1].value)
 	}
-		
-	if(sizeFrame === size.size && materialFrame === size.material[2].type){
-		await row.$eval(
-			selectorInputValue,
+
+	if (sizeFrame === size.size && materialFrame === size.material[2].type) {
+		await row.$eval(selectorInputValue,
 			(input, valor) => (input.value = valor),
-			size.material[2].variations[amountFrames - 1].value
-		)
+			size.material[2].variations[amountFrames - 1].value)
 	}
 }
 
-export async function changeValues(page, amountFrames){
+export async function changeValues(page, amountFrames) {
 	const table = await page.$("table.tabela-variacoes")
 	const rows = await table.$$("tbody tr")
 
 	rows.forEach(async (row) => {
 		const selectorInputValue = "td:nth-child(8) input"
-		const materialFrame = await row.$eval("td:nth-child(2)", (td) => td.textContent.trim())
-		const sizeFrame = await row.$eval("td:nth-child(3)", (td) => td.textContent.trim())
+		const materialFrame = await row.$eval("td:nth-child(2)", (td) =>
+			td.textContent.trim())
+		const sizeFrame = await row.$eval("td:nth-child(3)", (td) =>
+			td.textContent.trim())
 		// const productSKUFull = await row.$eval("td:nth-child(5)", (td) => td.textContent.trim())
 
-		updateValueSize(sizeP, sizeFrame, materialFrame, selectorInputValue, amountFrames, row)
-		updateValueSize(sizeM, sizeFrame, materialFrame, selectorInputValue, amountFrames, row)
-		updateValueSize(sizeG, sizeFrame, materialFrame, selectorInputValue, amountFrames, row)
-		updateValueSize(sizeGG, sizeFrame, materialFrame, selectorInputValue, amountFrames, row)
-	}) 
+		updateValueSize(
+			sizeP,
+			sizeFrame,
+			materialFrame,
+			selectorInputValue,
+			amountFrames,
+			row
+		)
+		updateValueSize(
+			sizeM,
+			sizeFrame,
+			materialFrame,
+			selectorInputValue,
+			amountFrames,
+			row
+		)
+		updateValueSize(
+			sizeG,
+			sizeFrame,
+			materialFrame,
+			selectorInputValue,
+			amountFrames,
+			row
+		)
+		updateValueSize(
+			sizeGG,
+			sizeFrame,
+			materialFrame,
+			selectorInputValue,
+			amountFrames,
+			row
+		)
+	})
 }
-
