@@ -24,7 +24,7 @@ export function getNumberEnd(str) {
 	return match ? parseInt(match[0]) : null
 }
 
-async function updateValueSize(
+export async function updateValueSize(
 	size,
 	sizeFrame,
 	materialFrame,
@@ -96,4 +96,35 @@ export async function changeValues(page, amountFrames) {
 			row
 		)
 	})
+}
+
+export async function findCategorie(page) {
+	const selector = ".categorias-adicionais li label:after"
+	const labels = await page.$$(selector)
+
+	const filteredLabels = await Promise.all(labels.map(async (label) => {
+		const li = await label.$eval("..", (el) => el)
+		const input = await li.$("input")
+		const text = await label.$eval(":first-child", (el) => el.innerText)
+		if (input && text) {
+			return text
+		}
+	}))
+
+	return filteredLabels.filter(Boolean)
+}
+
+export async function findValueInput(page, selector){
+	const selectorInput = await page.$(selector)
+	const valueInput = await page.evaluate((input) => input.value, selectorInput)
+
+	return valueInput
+}
+
+export async function findAmountFrames(page){
+	const selectInputSKU = "input#ProdutoSku"
+	const productSKU = await page.$eval(selectInputSKU, (input) => input.value)
+	const amountFrames = productSKU.slice(-1)
+
+	return amountFrames
 }
