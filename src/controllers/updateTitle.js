@@ -13,6 +13,7 @@ export async function updateTitle(page){
 				.replace("Kit", "")
 				.replace("quadro", "")
 				.replace("quadros", "")
+				.replace(/\d+/g, "")
 				.trim()
   
 			const newTitle = `Quadro decorativo ${amountFrames} telas ${categorie} ${formattedTitle}`
