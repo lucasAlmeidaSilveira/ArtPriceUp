@@ -99,19 +99,44 @@ export async function changeValues(page, amountFrames) {
 }
 
 export async function findCategorie(page) {
-	const selector = ".categorias-adicionais li label:after"
-	const labels = await page.$$(selector)
+	// const selector = ".categorias-adicionais li label:after"
+	// const labels = await page.$$(selector)
 
-	const filteredLabels = await Promise.all(labels.map(async (label) => {
-		const li = await label.$eval("..", (el) => el)
-		const input = await li.$("input")
-		const text = await label.$eval(":first-child", (el) => el.innerText)
-		if (input && text) {
-			return text
+	// const filteredLabels = await Promise.all(labels.map(async (label) => {
+	// 	const li = await label.$eval("..", (el) => el)
+	// 	const input = await li.$("input")
+	// 	const text = await label.$eval(":first-child", (el) => el.innerText)
+	// 	if (text & text !== 'Todos os quadros') {
+	// 		return text
+	// 	}
+	// }))
+
+	// return filteredLabels.filter(Boolean)
+
+	const isMainCategory = ".categorias-adicionais li label:after"
+	const liSelector = ".categorias-adicionais li"
+
+	const list = await page.$$(liSelector)
+
+	// const category = list.find(async (li) => {
+
+	// 	const isAfterLabel = await li.$("label:after") | null
+
+	// 	return isAfterLabel ? await li.$("label:first-child") : null
+	// })
+
+	const category = list.forEach(async (li) => {
+		const isAfterLabel = await li.$("label:after")
+
+		console.log("isAfterLabel", isAfterLabel)
+		console.log(await li.$eval("label", (label) => label.textContent.replace("_", "").trim()))
+		if(isAfterLabel) {
+			const labelContent = await li.$eval("label", (label) => label.textContent.replace("_", "").trim())
+			return labelContent
 		}
-	}))
 
-	return filteredLabels.filter(Boolean)
+	})
+	return category
 }
 
 export async function findValueInput(page, selector){
