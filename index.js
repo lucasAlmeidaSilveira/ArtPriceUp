@@ -28,21 +28,24 @@ async function login(page) {
 	(await page.url()) !== URLpainel ? await login(page) : "" // \n
 
 	try {
-		await waitForURL(page, "edit")
+		const i = 10
+		while (i > 1) {
+			await waitForURL(page, "edit")
 
-		// Tempo de atraso para carregamento da página
-		await new Promise((resolve) => setTimeout(resolve, 1000))
+			// Tempo de atraso para carregamento da página
+			await new Promise((resolve) => setTimeout(resolve, 1000))
 
-		// // Recuperando quantidade de quadros
-		// const amountFrames = findAmountFrames(page)
+			// // Recuperando quantidade de quadros
+			// const amountFrames = findAmountFrames(page)
 
-		// // Clique na tab variações
-		// await click(btnVariacoes, page)
+			// // Clique na tab variações
+			// await click(btnVariacoes, page)
 
-		// await changeValues(page, amountFrames)
+			// await changeValues(page, amountFrames)
 
-		// Atualizando title
-		await updateTitle(page)
+			// Atualizando title
+			await updateTitle(page)
+		}
 
 		// while (contador <= 18) {
 		//   let selectBtnEdit = `table.tabela-variacoes tr:nth-child(${contador}) a[title="Editar"]`;
