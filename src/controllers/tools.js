@@ -99,38 +99,14 @@ export async function changeValues(page, amountFrames) {
 }
 
 export async function findCategorie(page) {
-	const liSelector = ".categorias-adicionais li"
-	const listInputChecked = ".categorias-adicionais li input:checked"
+	const selectorCheckedLabels = ".categorias-adicionais li input:checked"
 
-	const list = await page.$$(liSelector)
-
-	// const categoryText = await Promise.all(list.map(async (li) => {
-	// 	const label = await li.$("label")
-	// 	const labelText = await page.evaluate((label) => label.textContent, label)
-	// 	const afterLabel = await page.evaluateHandle((el) => {
-	// 		const style = window.getComputedStyle(el, ":after")
-	// 		return {
-	// 			exists: style.content !== "none"
-	// 		}
-	// 	}, label)
-
-	// 	const { exists } = await afterLabel.jsonValue()
-
-	// 	console.log(labelText)
-		
-	// 	if (exists && labelText !== "Todos os quadros") {
-	// 		return labelText.replace(/_/g, "")
-	// 	}
-	// }))
-
-	// return categoryText.filter((category) => category).shift()
-
-	const checkedLabels = await page.$$eval("li input:checked + label", (labels) => labels.map((label) => label.textContent))
+	const checkedLabels = await page.$$eval(selectorCheckedLabels, (labels) => labels.map((label) => label.textContent))
 
 	if (checkedLabels[0] === "Todos os Quadros") {
 		return checkedLabels[1].replace(/_/g, "")
 	}
-	return checkedLabels[0].replace(/_/g, "")
+	return checkedLabels[0]
 }
 
 export async function findValueInput(page, selector){
