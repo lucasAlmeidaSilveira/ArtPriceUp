@@ -11,8 +11,8 @@ export async function updateTitle(page){
 		if (!oldTitle.includes("Quadro Decorativo")) {
 			const formattedTitle = oldTitle
 				.replace(/kit?/gi, "")
-				.replace(/quadro?/gi, "")
 				.replace(/quadros?/gi, "")
+				.replace(/quadro?/gi, "")
 				.replace(/\d+/g, "")
 				.trim()
       

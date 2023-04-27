@@ -99,44 +99,38 @@ export async function changeValues(page, amountFrames) {
 }
 
 export async function findCategorie(page) {
-	// const selector = ".categorias-adicionais li label:after"
-	// const labels = await page.$$(selector)
-
-	// const filteredLabels = await Promise.all(labels.map(async (label) => {
-	// 	const li = await label.$eval("..", (el) => el)
-	// 	const input = await li.$("input")
-	// 	const text = await label.$eval(":first-child", (el) => el.innerText)
-	// 	if (text & text !== 'Todos os quadros') {
-	// 		return text
-	// 	}
-	// }))
-
-	// return filteredLabels.filter(Boolean)
-
-	const isMainCategory = ".categorias-adicionais li label:after"
 	const liSelector = ".categorias-adicionais li"
+	const listInputChecked = ".categorias-adicionais li input:checked"
 
 	const list = await page.$$(liSelector)
 
-	// const category = list.find(async (li) => {
+	// const categoryText = await Promise.all(list.map(async (li) => {
+	// 	const label = await li.$("label")
+	// 	const labelText = await page.evaluate((label) => label.textContent, label)
+	// 	const afterLabel = await page.evaluateHandle((el) => {
+	// 		const style = window.getComputedStyle(el, ":after")
+	// 		return {
+	// 			exists: style.content !== "none"
+	// 		}
+	// 	}, label)
 
-	// 	const isAfterLabel = await li.$("label:after") | null
+	// 	const { exists } = await afterLabel.jsonValue()
 
-	// 	return isAfterLabel ? await li.$("label:first-child") : null
-	// })
+	// 	console.log(labelText)
+		
+	// 	if (exists && labelText !== "Todos os quadros") {
+	// 		return labelText.replace(/_/g, "")
+	// 	}
+	// }))
 
-	const category = list.forEach(async (li) => {
-		const isAfterLabel = await li.$("label:after")
+	// return categoryText.filter((category) => category).shift()
 
-		console.log("isAfterLabel", isAfterLabel)
-		console.log(await li.$eval("label", (label) => label.textContent.replace("_", "").trim()))
-		if(isAfterLabel) {
-			const labelContent = await li.$eval("label", (label) => label.textContent.replace("_", "").trim())
-			return labelContent
-		}
+	const checkedLabels = await page.$$eval("li input:checked + label", (labels) => labels.map((label) => label.textContent))
 
-	})
-	return category
+	if (checkedLabels[0] === "Todos os Quadros") {
+		return checkedLabels[1].replace(/_/g, "")
+	}
+	return checkedLabels[0].replace(/_/g, "")
 }
 
 export async function findValueInput(page, selector){
