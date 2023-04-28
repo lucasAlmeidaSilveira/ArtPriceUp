@@ -37,6 +37,7 @@ async function login(page) {
 		await waitForURL(page, "catalogo")
 		await new Promise((resolve) => setTimeout(resolve, 1000))
 
+		// ATUALIZAR TÍTULOS
 		await updateTitles(page, browser)
 
 		// Recuperando quantidade de quadros
