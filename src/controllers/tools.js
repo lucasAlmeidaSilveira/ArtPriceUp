@@ -13,6 +13,7 @@ export async function waitForURL(page, urlPart) {
 		if (page.url().includes(urlPart)) {
 			return
 		}
+		
 		await page.waitForTimeout(500)
 	}
 
@@ -50,6 +51,8 @@ export async function updateValueSize(
 			size.material[2].variations[amountFrames - 1].value)
 	}
 }
+
+
 
 export async function changeValues(page, amountFrames) {
 	const table = await page.$("table.tabela-variacoes")
