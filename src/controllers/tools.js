@@ -1,5 +1,3 @@
-import { sizeG, sizeGG, sizeM, sizeP } from "../db/pricesFrames.js"
-
 export async function click(selectorElement, page) {
 	await page.waitForSelector(selectorElement)
 	await page.click(selectorElement)
@@ -53,53 +51,6 @@ export async function updateValueSize(
 }
 
 
-
-export async function changeValues(page, amountFrames) {
-	const table = await page.$("table.tabela-variacoes")
-	const rows = await table.$$("tbody tr")
-
-	rows.forEach(async (row) => {
-		const selectorInputValue = "td:nth-child(8) input"
-		const materialFrame = await row.$eval("td:nth-child(2)", (td) =>
-			td.textContent.trim())
-		const sizeFrame = await row.$eval("td:nth-child(3)", (td) =>
-			td.textContent.trim())
-		// const productSKUFull = await row.$eval("td:nth-child(5)", (td) => td.textContent.trim())
-
-		updateValueSize(
-			sizeP,
-			sizeFrame,
-			materialFrame,
-			selectorInputValue,
-			amountFrames,
-			row
-		)
-		updateValueSize(
-			sizeM,
-			sizeFrame,
-			materialFrame,
-			selectorInputValue,
-			amountFrames,
-			row
-		)
-		updateValueSize(
-			sizeG,
-			sizeFrame,
-			materialFrame,
-			selectorInputValue,
-			amountFrames,
-			row
-		)
-		updateValueSize(
-			sizeGG,
-			sizeFrame,
-			materialFrame,
-			selectorInputValue,
-			amountFrames,
-			row
-		)
-	})
-}
 
 export async function findCategorie(page) {
 	const selectorCheckedLabels = ".categorias-adicionais li input:checked"

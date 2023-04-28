@@ -1,4 +1,5 @@
-import { click } from "./tools.js"
+import { sizeG, sizeGG, sizeM, sizeP } from "../db/pricesFrames.js"
+import { click, updateValueSize } from "./tools.js"
 
 const selectInputValue = "input#ProdutoEstoqueValorVenda"
 const selectBtnSubmit = "button.btn.btn-icon.btn-submit"
@@ -6,7 +7,7 @@ const selectInputInitPromo = "#ProdutoEstoquePromocaoDataInicio"
 const selectInputEndPromo = "#ProdutoEstoquePromocaoDataFim"
 const selectInputPercentual = "#ProdutoEstoquePercentualPromocao"
 
-async function solutionBug(page) {
+export async function solutionBug(page) {
 	await page.focus(selectInputPercentual)
 	await page.keyboard.type("25")
 	await page.keyboard.press("Tab")
@@ -15,7 +16,7 @@ async function solutionBug(page) {
 	await page.keyboard.press("Tab")
 }
 
-async function updateValueDefault(page, checkBoxPromo) {
+export async function updateValueDefault(page, checkBoxPromo) {
 	// Clica no botão de Promoção
 	await click(checkBoxPromo, page)
 
@@ -32,7 +33,7 @@ async function updateValueDefault(page, checkBoxPromo) {
 	await page.$eval(selectInputEndPromo, (input) => (input.value = "01/01/2024"))
 }
 
-async function updateInputValue(page) {
+export async function updateInputValue(page) {
 	await page.waitForSelector("#ProdutoEstoquePromocao")
 	const checkBoxPromo = "#ProdutoEstoquePromocao"
 	// Realiza a verificação do check box da promoção
@@ -59,4 +60,49 @@ async function updateInputValue(page) {
 	await click(selectBtnSubmit, page)
 }
 
-export { updateInputValue }
+export async function changeValues(page, amountFrames) {
+	const table = await page.$("table.tabela-variacoes")
+	const rows = await table.$$("tbody tr")
+
+	rows.forEach(async (row) => {
+		const selectorInputValue = "td:nth-child(8) input"
+		const materialFrame = await row.$eval("td:nth-child(2)", (td) =>
+			td.textContent.trim())
+		const sizeFrame = await row.$eval("td:nth-child(3)", (td) =>
+			td.textContent.trim())
+		// const productSKUFull = await row.$eval("td:nth-child(5)", (td) => td.textContent.trim())
+
+		updateValueSize(
+			sizeP,
+			sizeFrame,
+			materialFrame,
+			selectorInputValue,
+			amountFrames,
+			row
+		)
+		updateValueSize(
+			sizeM,
+			sizeFrame,
+			materialFrame,
+			selectorInputValue,
+			amountFrames,
+			row
+		)
+		updateValueSize(
+			sizeG,
+			sizeFrame,
+			materialFrame,
+			selectorInputValue,
+			amountFrames,
+			row
+		)
+		updateValueSize(
+			sizeGG,
+			sizeFrame,
+			materialFrame,
+			selectorInputValue,
+			amountFrames,
+			row
+		)
+	})
+}

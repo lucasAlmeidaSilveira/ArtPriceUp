@@ -1,5 +1,5 @@
 export const sizeP = {
-	size: "30cm x 45cm",
+	size: "40cm x 60cm",
 	material: [
 		{ type: "Canvas", variations: [
 			{ type: "Único", value: "0,00" },
