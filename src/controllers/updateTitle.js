@@ -2,6 +2,7 @@ import { click as clickButton, findAmountFrames, findCategorie, findValueInput }
 
 export async function updateTitles(page, browser){
 	const rows = await page.$$("table#tb-produtos tbody tr")
+	const btnNext = ".pagination .btn-next a"
 
 	for (const row of rows) {
 		try {
@@ -10,8 +11,12 @@ export async function updateTitles(page, browser){
 			// console.log(error)
 		}
 	}
+	
+	if (!btnNext) {
+		return
+	}
 
-	await page.waitForNavigation()
+	await clickButton(btnNext, page)
 	await updateTitles(page, browser)
 }
 
