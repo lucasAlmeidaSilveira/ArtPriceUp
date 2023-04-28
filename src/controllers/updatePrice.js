@@ -1,5 +1,5 @@
 import { sizeG, sizeGG, sizeM, sizeP } from "../db/pricesFrames.js"
-import { click, updateValueSize } from "./tools.js"
+import { click } from "./tools.js"
 
 const selectInputValue = "input#ProdutoEstoqueValorVenda"
 const selectBtnSubmit = "button.btn.btn-icon.btn-submit"
@@ -58,6 +58,33 @@ export async function updateInputValue(page) {
 
 	// Salva as configurações
 	await click(selectBtnSubmit, page)
+}
+
+export async function updateValueSize(
+	size,
+	sizeFrame,
+	materialFrame,
+	selectorInputValue,
+	amountFrames,
+	row
+) {
+	if (sizeFrame === size.size && materialFrame === size.material[0].type) {
+		await row.$eval(selectorInputValue,
+			(input, valor) => (input.value = valor),
+			size.material[0].variations[amountFrames - 1].value)
+	}
+
+	if (sizeFrame === size.size && materialFrame === size.material[1].type) {
+		await row.$eval(selectorInputValue,
+			(input, valor) => (input.value = valor),
+			size.material[1].variations[amountFrames - 1].value)
+	}
+
+	if (sizeFrame === size.size && materialFrame === size.material[2].type) {
+		await row.$eval(selectorInputValue,
+			(input, valor) => (input.value = valor),
+			size.material[2].variations[amountFrames - 1].value)
+	}
 }
 
 export async function changeValues(page, amountFrames) {
