@@ -69,7 +69,7 @@ export async function updateValueSize(
 	amountFrames,
 	row
 ) {
-	if(materialFrame === "Canvas" && typeFrame !== "Quadro sem vidro"){
+	if(materialFrame === "Canvas" && (typeFrame !== "Quadro sem vidro" || typeFrame !== "Borda infinita")){
 		return
 	}
 	
