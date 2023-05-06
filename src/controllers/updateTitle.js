@@ -1,4 +1,4 @@
-import { click as clickButton, findAmountFrames, findCategorie, findValueInput } from "./tools.js"
+import { handleClick, findAmountFrames, findCategorie, findValueInput } from "./tools.js"
 
 export async function updateTitles(page, browser){
 	const rows = await page.$$("table#tb-produtos tbody tr")
@@ -16,7 +16,7 @@ export async function updateTitles(page, browser){
 		return
 	}
 
-	await clickButton(btnNext, page)
+	await handleClick(btnNext, page)
 	await updateTitles(page, browser)
 }
 
@@ -59,7 +59,7 @@ export async function updateTitle(page){
 		}
 	}
 
-	await clickButton(btnSave, page)
+	await handleClick(btnSave, page)
 
 	return
 }

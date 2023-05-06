@@ -1,5 +1,5 @@
 import { sizeG, sizeGG, sizeM, sizeP } from "../db/pricesFrames.js"
-import { click } from "./tools.js"
+import { handleClick } from "./tools.js"
 
 const selectInputValue = "input#ProdutoEstoqueValorVenda"
 const selectBtnSubmit = "button.btn.btn-icon.btn-submit"
@@ -18,7 +18,7 @@ export async function solutionBug(page) {
 
 export async function updateValueDefault(page, checkBoxPromo) {
 	// Clica no botão de Promoção
-	await click(checkBoxPromo, page)
+	await handleClick(checkBoxPromo, page)
 
 	// Atualiza valor de desconto para 30
 	await page.focus(selectInputPercentual)
@@ -57,17 +57,22 @@ export async function updateInputValue(page) {
 	await solutionBug(page)
 
 	// Salva as configurações
-	await click(selectBtnSubmit, page)
+	await handleClick(selectBtnSubmit, page)
 }
 
 export async function updateValueSize(
 	size,
+	typeFrame,
 	sizeFrame,
 	materialFrame,
 	selectorInputValue,
 	amountFrames,
 	row
 ) {
+	if(materialFrame === "Canvas" && typeFrame !== "Quadro sem vidro"){
+		return
+	}
+	
 	if (sizeFrame === size.size && materialFrame === size.material[0].type) {
 		await row.$eval(selectorInputValue,
 			(input, valor) => (input.value = valor),
@@ -90,17 +95,20 @@ export async function updateValueSize(
 export async function changeValues(page, amountFrames) {
 	const table = await page.$("table.tabela-variacoes")
 	const rows = await table.$$("tbody tr")
+	const btnSave = "button.btn-submit"
 
 	rows.forEach(async (row) => {
 		const selectorInputValue = "td:nth-child(8) input"
 		const materialFrame = await row.$eval("td:nth-child(2)", (td) =>
 			td.textContent.trim())
+		const typeFrame = await row.$eval("td:nth-child(4)", (td) => td.textContent.trim())
 		const sizeFrame = await row.$eval("td:nth-child(3)", (td) =>
 			td.textContent.trim())
 		// const productSKUFull = await row.$eval("td:nth-child(5)", (td) => td.textContent.trim())
 
 		updateValueSize(
 			sizeP,
+			typeFrame,
 			sizeFrame,
 			materialFrame,
 			selectorInputValue,
@@ -109,6 +117,7 @@ export async function changeValues(page, amountFrames) {
 		)
 		updateValueSize(
 			sizeM,
+			typeFrame,
 			sizeFrame,
 			materialFrame,
 			selectorInputValue,
@@ -117,6 +126,7 @@ export async function changeValues(page, amountFrames) {
 		)
 		updateValueSize(
 			sizeG,
+			typeFrame,
 			sizeFrame,
 			materialFrame,
 			selectorInputValue,
@@ -125,6 +135,7 @@ export async function changeValues(page, amountFrames) {
 		)
 		updateValueSize(
 			sizeGG,
+			typeFrame,
 			sizeFrame,
 			materialFrame,
 			selectorInputValue,
@@ -132,4 +143,6 @@ export async function changeValues(page, amountFrames) {
 			row
 		)
 	})
+
+	await handleClick(btnSave, page)
 }
