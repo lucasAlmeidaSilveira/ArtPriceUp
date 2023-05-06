@@ -58,7 +58,10 @@ export async function findAmountFrames(page){
 		const number = match[1]
 		return number
 	} else {
-		const number = value.match(/\d+/g)
+		let number = value.match(/\d+/g)
+		if(!number) {
+			number = 1
+		}
 		return number
 	}
 }

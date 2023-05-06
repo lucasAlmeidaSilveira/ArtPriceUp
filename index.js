@@ -39,11 +39,11 @@ async function login(page) {
 		await new Promise((resolve) => setTimeout(resolve, 1000))
 
 		// ATUALIZAR TÍTULOS
-		// await updateTitles(page, browser)
+		await updateTitles(page, browser)
 
 		// ATUALIZAR VALORES
-		await loopForEach(page, browser, changeValues)
-		
+		// await loopForEach(page, browser, changeValues)
+
 	} catch (err) {
 		const error = err.message === "No element found for selector: a#ui-id-6"
 			? "Excesso de requisições"

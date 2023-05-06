@@ -42,7 +42,7 @@ export async function updateTitle(page){
 
 	let categorie = await findCategorie(page)
 	const oldTitle = await findValueInput(page, "#ProdutoNome")
-	const amountFrames = await findAmountFrames(page)
+	const amountFrames = await findAmountFrames(page) === null ? "1" : await findAmountFrames(page)
 	const btnSave = "button.btn-submit"
 
 	if (!oldTitle.includes("Espelho")) {
