@@ -20,7 +20,7 @@ export const sizeP = {
 }
 
 export const sizeM = {
-	size: "60cm x 90cm" || "70cm x 70cm",
+	size: "60cm x 90cm" || "60cm x 90cm (30% OFF)" || "70cm x 70cm",
 	material: [
 		{ type: "Canvas", variations: [
 			{ type: "Único", value: "559,00" },

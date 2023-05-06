@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer"
 import dotenv from "dotenv"
 import { initPuppeteer } from "./src/config.js"
-import { findAmountFrames, waitForURL } from "./src/controllers/tools.js"
+import { click, findAmountFrames, waitForURL } from "./src/controllers/tools.js"
 import { updateTitles } from "./src/controllers/updateTitle.js"
 import { changeValues } from "./src/controllers/updatePrice.js"
 
@@ -27,7 +27,7 @@ async function login(page) {
 	
 	const URLpainel = process.env.URLPAINEL
 	// const URLproducts = process.env.URLPRODUTOS
-	// const btnVariacoes = "a#ui-id-6"
+	const btnVariacoes = "a#ui-id-6"
 	// const contador = 1
 
 	await page.goto(URLpainel);
@@ -35,17 +35,17 @@ async function login(page) {
 
 	try {
 		// Esperar pela página de catálogo de produtos
-		await waitForURL(page, "catalogo")
+		await waitForURL(page, "edit")
 		await new Promise((resolve) => setTimeout(resolve, 1000))
 
-		// ATUALIZAR TÍTULOS
-		await updateTitles(page, browser)
+		// // ATUALIZAR TÍTULOS
+		// await updateTitles(page, browser)
 
 		// Recuperando quantidade de quadros
-		const amountFrames = findAmountFrames(page)
+		const amountFrames = await findAmountFrames(page)
 
-		// // Clique na tab variações
-		// await click(btnVariacoes, page)
+		// Clique na tab variações
+		await click(btnVariacoes, page)
 
 		await changeValues(page, amountFrames)
 	} catch (err) {
