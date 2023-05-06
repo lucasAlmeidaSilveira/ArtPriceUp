@@ -38,18 +38,12 @@ async function login(page) {
 		await waitForURL(page, "produtos")
 		await new Promise((resolve) => setTimeout(resolve, 1000))
 
-		// // ATUALIZAR TÍTULOS
+		// ATUALIZAR TÍTULOS
 		// await updateTitles(page, browser)
 
-		// Recuperando quantidade de quadros
-		// const amountFrames = await findAmountFrames(page)
-
-		// Clique na tab variações
-		// await handleClick(btnVariacoes, page)
-
+		// ATUALIZAR VALORES
 		await loopForEach(page, browser, changeValues)
-
-		// await changeValues(page, amountFrames)
+		
 	} catch (err) {
 		const error = err.message === "No element found for selector: a#ui-id-6"
 			? "Excesso de requisições"
