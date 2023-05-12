@@ -1,6 +1,10 @@
 export async function handleClick(selectorElement, page) {
-	await page.waitForSelector(selectorElement)
-	await page.click(selectorElement)
+	const element = await page.$(selectorElement)
+
+	if (element !== null) {
+		await page.waitForSelector(selectorElement)
+		await page.click(selectorElement)
+	} 
 }
 
 export async function waitForURL(page, urlPart) {
@@ -68,6 +72,7 @@ export async function findAmountFrames(page){
 
 export async function loopForEach(page, browser, action){
 	const rows = await page.$$("table#tb-produtos tbody tr")
+	const btnNext = ".pagination .btn-next a"
 
 	for (const row of rows) {
 		try {
@@ -76,6 +81,13 @@ export async function loopForEach(page, browser, action){
 			// console.log(error)
 		}
 	}
+
+	if (!btnNext) {
+		return
+	}
+
+	await handleClick(btnNext, page)
+	await loopForEach(page, browser, action)
 }
 
 async function editProduct(row, browser, action) {
@@ -96,7 +108,16 @@ export async function openNewPage(link, browser, action) {
 	// Clique nas variações
 	await handleClick(btnVariacoes, newPage)
   
-	await action(newPage, amountFrames)
+	await action(browser, newPage, amountFrames)
+
+	async function closeAllPagesExceptFirst(browser) {
+		const pages = await browser.pages()
+	
+		for (let i = 2; i < pages.length; i++) {
+			await pages[i].close()
+		}
+	}
   
 	await newPage.close()
+	await closeAllPagesExceptFirst(browser)
 }

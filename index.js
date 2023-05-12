@@ -3,7 +3,7 @@ import dotenv from "dotenv"
 import { initPuppeteer } from "./src/config.js"
 import { handleClick, findAmountFrames, loopForEach, waitForURL } from "./src/controllers/tools.js"
 import { updateTitles } from "./src/controllers/updateTitle.js"
-import { changeValues } from "./src/controllers/updatePrice.js"
+import { changeValues, forEachVariations, updateValueFrame } from "./src/controllers/updatePrice.js"
 
 dotenv.config()
 
@@ -36,13 +36,12 @@ async function login(page) {
 	try {
 		// Esperar pela página de catálogo de produtos
 		await waitForURL(page, "produtos")
-		await new Promise((resolve) => setTimeout(resolve, 1000))
 
 		// ATUALIZAR TÍTULOS
-		await updateTitles(page, browser)
+		// await updateTitles(page, browser)
 
 		// ATUALIZAR VALORES
-		// await loopForEach(page, browser, changeValues)
+		await loopForEach(page, browser, forEachVariations)
 
 	} catch (err) {
 		const error = err.message === "No element found for selector: a#ui-id-6"
