@@ -85,13 +85,17 @@ export async function loopForEach(page, browser, action){
 	const rows = await page.$$("table#tb-produtos tbody tr")
 	const btnNext = ".pagination .btn-next a"
 
+	// Dando o log do número da página que está ativa
+	const url = page.url()
+	const pageNumber = extractLastNumber(url)
+	console.log("Página:", pageNumber)
+
 	for (const row of rows) {
 		try {
 			// Verificando se o produto já foi atualizado
 			const selectPriceProduct = "td:nth-child(3)"
 			const priceProduct = await row.$eval(selectPriceProduct, (td) => td.textContent.trim())
 			const isUpdated = priceProduct.includes("R$ 299,00")
-			console.log(isUpdated)
 			
 			// Verificando se o produto atual é espelho ou não
 			const selectNameProduct = "td .product-info .product-nome"
@@ -99,16 +103,11 @@ export async function loopForEach(page, browser, action){
 			const regexEspelho = /espelho/i
 			const isMirror = regexEspelho.test(nameProduct)
 			
-			// Dando o log do número da página que está ativa
-			const url = page.url()
-			const pageNumber = extractLastNumber(url)
-			console.log("Página:", pageNumber)
-			
 			if(isMirror || isUpdated) {
 				continue
-			} else {
-				await editProduct(row, browser, action)
 			}
+
+			await editProduct(row, browser, action)
 
 		} catch (error) {
 			// console.log(error)
@@ -135,10 +134,15 @@ export async function openNewPage(link, browser, action) {
 	const newPage = await browser.newPage()
 	await newPage.goto(link)
 
-	const btnVariacoes = "a#ui-id-6"
 	const amountFrames = await findAmountFrames(newPage)
 	
+	// Dando o log do produto que está sendo editado
+	const selectInputName = "input#ProdutoNome"
+	const nameProduct = await newPage.$eval(selectInputName, (input) => input.value)
+	console.log(nameProduct)
+	
 	// Clique nas variações
+	const btnVariacoes = "a#ui-id-6"
 	await handleClick(btnVariacoes, newPage)
   
 	await action(browser, newPage, amountFrames)
