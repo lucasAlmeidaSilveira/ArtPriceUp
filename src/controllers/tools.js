@@ -70,13 +70,36 @@ export async function findAmountFrames(page){
 	}
 }
 
+export function getLastExpression(url) {
+	const lastSlashIndex = url.lastIndexOf("/")
+	return url.substring(lastSlashIndex + 1)
+}
+
+export function extractLastNumber(url) {
+	const regex = /(\d+)$/
+	const match = url.match(regex)
+	return match ? match[1] : null
+}
+
 export async function loopForEach(page, browser, action){
 	const rows = await page.$$("table#tb-produtos tbody tr")
 	const btnNext = ".pagination .btn-next a"
 
 	for (const row of rows) {
 		try {
-			await editProduct(row, browser, action)
+			const selectNameProduct = "td .product-info .product-nome"
+			const nameProduct = await row.$eval(selectNameProduct, (span) => span.textContent.trim())
+			const regex = /espelho/i
+			const isMirror = regex.test(nameProduct)
+			const page = extractLastNumber(page.url())
+			console.log("Página:", page)
+			
+			if(isMirror) {
+				continue
+			} else {
+				// await editProduct(row, browser, action)
+			}
+
 		} catch (error) {
 			// console.log(error)
 		}
