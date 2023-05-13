@@ -87,17 +87,27 @@ export async function loopForEach(page, browser, action){
 
 	for (const row of rows) {
 		try {
+			// Verificando se o produto já foi atualizado
+			const selectPriceProduct = "td:nth-child(3)"
+			const priceProduct = await row.$eval(selectPriceProduct, (td) => td.textContent.trim())
+			const isUpdated = priceProduct.includes("R$ 299,00")
+			console.log(isUpdated)
+			
+			// Verificando se o produto atual é espelho ou não
 			const selectNameProduct = "td .product-info .product-nome"
 			const nameProduct = await row.$eval(selectNameProduct, (span) => span.textContent.trim())
-			const regex = /espelho/i
-			const isMirror = regex.test(nameProduct)
-			const page = extractLastNumber(page.url())
-			console.log("Página:", page)
+			const regexEspelho = /espelho/i
+			const isMirror = regexEspelho.test(nameProduct)
 			
-			if(isMirror) {
+			// Dando o log do número da página que está ativa
+			const url = page.url()
+			const pageNumber = extractLastNumber(url)
+			console.log("Página:", pageNumber)
+			
+			if(isMirror || isUpdated) {
 				continue
 			} else {
-				// await editProduct(row, browser, action)
+				await editProduct(row, browser, action)
 			}
 
 		} catch (error) {
