@@ -122,7 +122,7 @@ export async function loopForEach(page, browser, action){
 	await loopForEach(page, browser, action)
 }
 
-async function editProduct(row, browser, action) {
+export async function editRow(row, browser, action) {
 	const editButton = await row.$("td:nth-child(6) a[title='Editar']")
 	const link = await editButton.getProperty("href")
 	const href = await link.jsonValue()
@@ -146,15 +146,23 @@ export async function openNewPage(link, browser, action) {
 	await handleClick(btnVariacoes, newPage)
   
 	await action(browser, newPage, amountFrames)
-
-	async function closeAllPagesExceptFirst(browser) {
-		const pages = await browser.pages()
-	
-		for (let i = 2; i < pages.length; i++) {
-			await pages[i].close()
-		}
-	}
   
 	await newPage.close()
 	await closeAllPagesExceptFirst(browser)
+}
+
+export async function closeAllPagesExceptFirst(browser) {
+	const pages = await browser.pages()
+
+	for (let i = 2; i < pages.length; i++) {
+		await pages[i].close()
+	}
+}
+
+export async function editProduct(row, browser, action) {
+	const editButton = await row.$("td:nth-child(6) a[title='Editar']")
+	const link = await editButton.getProperty("href")
+	const href = await link.jsonValue()
+
+	await openNewPage(href, browser, action)
 }
