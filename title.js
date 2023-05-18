@@ -1,9 +1,8 @@
 import puppeteer from "puppeteer"
 import dotenv from "dotenv"
 import { initPuppeteer } from "./src/config.js"
-import { handleClick, findAmountFrames, loopForEach, waitForURL } from "./src/controllers/tools.js"
+import { waitForURL } from "./src/controllers/tools.js"
 import { updateTitles } from "./src/controllers/updateTitle.js"
-import { changeValues, forEachVariations, updateValueFrame } from "./src/controllers/updatePrice.js"
 
 dotenv.config()
 
@@ -38,11 +37,7 @@ async function login(page) {
 		await waitForURL(page, "produtos")
 
 		// ATUALIZAR TÍTULOS
-		// await updateTitles(page, browser)
-
-		// ATUALIZAR VALORES
-		await loopForEach(page, browser, forEachVariations)
-
+		await updateTitles(page, browser)
 	} catch (err) {
 		const error = err.message === "No element found for selector: a#ui-id-6"
 			? "Excesso de requisições"
