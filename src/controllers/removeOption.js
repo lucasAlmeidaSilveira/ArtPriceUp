@@ -20,10 +20,6 @@ export async function removeOption(page, browser) {
 	await removeOption(page, browser)
 }
 
-async function selectCheckBox(element){
-	element.checked = true
-}
-
 async function remove(browser, page, amountFrames) {
 	const rows = await page.$$("table.tabela-variacoes tbody tr")
 
