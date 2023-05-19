@@ -30,7 +30,6 @@ async function login(page) {
 	await page.goto(URLPainel);
 	(await page.url()) !== URLPainel ? await login(page) : "" // \n
 
-	// await page.goto(URLProdutos)
 	try {
 		// Esperar pela página de catálogo de produtos
 		await waitForURL(page, "produtos")
