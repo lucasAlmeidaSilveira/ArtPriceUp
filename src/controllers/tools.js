@@ -87,7 +87,10 @@ export async function loopForEach(page, browser, action){
 
 	// Dando o log do número da página que está ativa
 	const url = page.url()
-	const pageNumber = extractLastNumber(url)
+	let pageNumber = extractLastNumber(url)
+	if(pageNumber === null) {
+		pageNumber = "1"
+	}
 	console.log("Página:", pageNumber)
 
 	for (const row of rows) {
@@ -95,7 +98,9 @@ export async function loopForEach(page, browser, action){
 			// Verificando se o produto já foi atualizado
 			const selectPriceProduct = "td:nth-child(3)"
 			const priceProduct = await row.$eval(selectPriceProduct, (td) => td.textContent.trim())
-			const isUpdated = priceProduct.includes("R$ 299,00")
+			
+			// const isUpdated = priceProduct.includes("R$ 299,00")
+			const isUpdated = false
 			
 			// Verificando se o produto atual é espelho ou não
 			const selectNameProduct = "td .product-info .product-nome"
@@ -144,8 +149,9 @@ export async function openNewPage(link, browser, action) {
 	// Clique nas variações
 	const btnVariacoes = "a#ui-id-6"
 	await handleClick(btnVariacoes, newPage)
-  
-	await action(browser, newPage, amountFrames)
+	if(amountFrames === "2" || amountFrames === "3") {
+		await action(browser, newPage, amountFrames)
+	}
   
 	await newPage.close()
 	await closeAllPagesExceptFirst(browser)

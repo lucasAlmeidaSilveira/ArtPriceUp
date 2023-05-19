@@ -93,15 +93,10 @@ export async function updateValueFrame(page, amountFrames) {
 	await page.waitForSelector(checkBoxPromo)
 	const isChecked = await page.$eval(checkBoxPromo, (input) => input.checked)
 	
-	if(isChecked) {
-		// Clique no check da promo
-		await handleClick(btnCancelPromo)
-	}
-	
 	// Saindo dos tamanhos de quadros que não farão alteração
-	const breakAction = sizeFrame === "120cm x 80cm (30% OFF)" || sizeFrame === "150cm x 100cm" || sizeFrame === "90cm x 90cm" || sizeFrame === "90cm x 90cm (30% OFF)" || sizeFrame === "120cm x 120cm"
+	const breakAction = sizeFrame === "60cm x 90cm (30% OFF)" || sizeFrame === "60cm x 90cm"
 
-	if(breakAction) {
+	if(!breakAction) {
 		if(isChecked) {
 			// Clique no check da promo
 			await handleClick(btnCancelPromo, page)
@@ -182,13 +177,13 @@ async function updateValuePromo(
 	amountFrames,
 	page
 ) {
-	if (size.size.includes(sizeFrame) && materialFrame === size.material[0].type) {
-		const value = size.material[0].variations[amountFrames - 1].value
+	// if (size.size.includes(sizeFrame) && materialFrame === size.material[0].type) {
+	// 	const value = size.material[0].variations[amountFrames - 1].value
 		
-		await page.waitForSelector(selectorInputValue)
-		await page.$eval(selectorInputValue,
-			(input, valor) => (input.value = valor), value)
-	}
+	// 	await page.waitForSelector(selectorInputValue)
+	// 	await page.$eval(selectorInputValue,
+	// 		(input, valor) => (input.value = valor), value)
+	// }
 
 	if (size.size.includes(sizeFrame) && materialFrame === size.material[1].type) {
 		const value = size.material[1].variations[amountFrames - 1].value
@@ -206,7 +201,7 @@ async function updateValuePromo(
 			(input, valor) => (input.value = valor), value)
 	}
 	
-	if (size.size.includes(sizeFrame) && materialFrame === "Canvas" && typeFrame !== "Borda infinita") {
+	if (size.size.includes(sizeFrame) && materialFrame === "Canvas (Tela de pintura)" && typeFrame !== "Borda infinita") {
 		const value = size.material[3].variations[amountFrames - 1].value
 
 		await page.waitForSelector(selectorInputValue)

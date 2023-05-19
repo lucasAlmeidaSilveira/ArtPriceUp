@@ -1,19 +1,19 @@
 // A Diferença do Canvas com borda infinita para canaleta é de R$250 a mais para a de canaleta
 
 export const sizeP = {
-	size: ["40cm x 60cm", "50cm x 50cm"],
+	size: ["40cm x 60cm", "40cm x 60cm (10% OFF)", "50cm x 50cm"],
 	material: [
-		{ type: "Canvas", variations: [
+		{ type: "Canvas (Tela de pintura)", variations: [
 			{ amountFrames: "1", value: "0,00" },
 			{ amountFrames: "2", value: "389,00" },
 			{ amountFrames: "3", value: "389,00" }
 		]},
-		{ type: "Quadro sem vidro", variations: [
+		{ type: "Quadro sem vidro (Mais econômico)", variations: [
 			{ amountFrames: "1", value: "0,00" },
 			{ amountFrames: "2", value: "299,00" },
 			{ amountFrames: "3", value: "299,00" }
 		]},
-		{ type: "Quadro com vidro", variations: [
+		{ type: "Quadro com vidro (Mais Vendido)", variations: [
 			{ amountFrames: "1", value: "0,00" },
 			{ amountFrames: "2", value: "399,00" },
 			{ amountFrames: "3", value: "399,00" }
@@ -29,20 +29,20 @@ export const sizeP = {
 export const sizeM = {
 	size: ["60cm x 90cm", "60cm x 90cm (30% OFF)", "70cm x 70cm"],
 	material: [
-		{ type: "Canvas", variations: [
+		{ type: "Canvas (Tela de pintura)", variations: [
 			{ amountFrames: "1", value: "389,00" },
 			{ amountFrames: "2", value: "499,00" },
 			{ amountFrames: "3", value: "599,00" }
 		]},
-		{ type: "Quadro sem vidro", variations: [
+		{ type: "Quadro sem vidro (Mais econômico)", variations: [
 			{ amountFrames: "1", value: "299,00" },
 			{ amountFrames: "2", value: "499,00" },
-			{ amountFrames: "3", value: "599,00" }
+			{ amountFrames: "3", value: "499,00" }
 		]},
-		{ type: "Quadro com vidro", variations: [
+		{ type: "Quadro com vidro (Mais Vendido)", variations: [
 			{ amountFrames: "1", value: "399,00" },
-			{ amountFrames: "2", value: "899,00" },
-			{ amountFrames: "3", value: "899,00" }
+			{ amountFrames: "2", value: "799,00" },
+			{ amountFrames: "3", value: "799,00" }
 		]},
 		{ type: "Canaleta", variations: [
 			{ amountFrames: "1", value: "399,00" },
