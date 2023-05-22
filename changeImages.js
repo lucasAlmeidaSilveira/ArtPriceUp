@@ -33,8 +33,14 @@ async function login(page) {
 	(await page.url()) !== URLpainel ? await login(page) : "" // \n
 
 	try {
-		// Esperar pela página de catálogo de produtos
-		await waitForURL(page, "produtos")
+		const pageProducts = process.argv[2]
+		
+		if(pageProducts) {
+			await page.goto(`https://www.outletdosquadros.com.br/painel/catalogo/produtos/index/page:${pageProducts}`)
+		} else {
+			// Esperar pela página de catálogo de produtos
+			await waitForURL(page, "produtos")
+		}
 
 		// ATUALIZAR VALORES
 		await loopForEachImage(page, browser)

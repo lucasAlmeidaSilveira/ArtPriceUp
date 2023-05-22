@@ -23,7 +23,11 @@ export async function loopForEachImage(page, browser){
 			
 			// Verificando se o produto atual é espelho ou não
 			const selectNameProduct = "td .product-info .product-nome"
+			const selectSKUProduct = "td .product-info .product-sku"
 			const nameProduct = await row.$eval(selectNameProduct, (span) => span.textContent.trim())
+			const skuProduct = await row.$eval(selectSKUProduct, (span) => span.textContent.trim())
+			console.log(skuProduct)
+
 			const regexEspelho = /espelho/i
 			const isMirror = regexEspelho.test(nameProduct)
 			
@@ -37,13 +41,6 @@ export async function loopForEachImage(page, browser){
 			// console.log(error)
 		}
 	}
-
-	if (!btnNext) {
-		return
-	}
-
-	await handleClick(btnNext, page)
-	await loopForEachImage(page, browser)
 }
 
 export async function editProduct(row, browser) {
@@ -107,7 +104,7 @@ async function changeImage(browser, page){
 			await newPage.goto(href)
 
 			// Rolar até o final da página
-			await page.evaluate(() => {
+			await newPage.evaluate(() => {
 				window.scrollTo(0, document.body.scrollHeight)
 			})
 
