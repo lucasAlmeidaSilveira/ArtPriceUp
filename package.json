@@ -4,7 +4,8 @@
   "scripts": {
     "updateTitles": "node title.js",
     "updatePrices": "node price.js",
-    "removeOption": "node remove.js"
+    "removeOption": "node remove.js",
+    "changeImages": "node changeImages.js"
   },
   "dependencies": {
     "dotenv": "^16.0.3",
