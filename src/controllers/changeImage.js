@@ -58,6 +58,16 @@ export async function openNewPage(link, browser) {
 	const newPage = await browser.newPage()
 	await newPage.goto(link)
 
+	const displaySize = await newPage.evaluate(() => {
+		return {
+			width: window.screen.width,
+			height: window.screen.height,
+			deviceScaleFactor: 1
+		}
+	})
+
+	await newPage.setViewport(displaySize)
+
 	// Dando o log do produto que está sendo editado
 	const selectInputName = "input#ProdutoNome"
 	const nameProduct = await newPage.$eval(selectInputName, (input) => input.value)
