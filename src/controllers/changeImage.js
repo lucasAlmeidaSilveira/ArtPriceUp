@@ -1,4 +1,5 @@
-import { closeAllPagesExceptFirst, extractLastNumber, findAmountFrames, handleClick } from "./tools.js"
+import { closeAllPagesExceptFirst, extractLastNumber, handleClick, waitForURL } from "./tools.js"
+
 
 export async function loopForEachImage(page, browser){
 	const rows = await page.$$("table#tb-produtos tbody tr")
@@ -41,6 +42,9 @@ export async function loopForEachImage(page, browser){
 			// console.log(error)
 		}
 	}
+
+	await waitForURL(page, "produtos")
+	await loopForEachImage(page, browser)
 }
 
 export async function editProduct(row, browser) {
