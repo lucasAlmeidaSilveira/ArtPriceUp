@@ -43,7 +43,7 @@ export async function loopForEachImage(page, browser){
 		}
 	}
 
-	await waitForURL(page, "produtos")
+	await page.waitForNavigation()
 	await loopForEachImage(page, browser)
 }
 
