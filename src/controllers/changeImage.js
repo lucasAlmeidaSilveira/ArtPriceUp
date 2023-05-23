@@ -1,4 +1,4 @@
-import { closeAllPagesExceptFirst, extractLastNumber, handleClick, waitForURL } from "./tools.js"
+import { closeAllPagesExceptFirst, extractLastNumber, handleClick } from "./tools.js"
 
 
 export async function loopForEachImage(page, browser){
@@ -84,6 +84,29 @@ export async function openNewPage(link, browser) {
 	await closeAllPagesExceptFirst(browser)
 }
 
+async function updateDivElements(page) {
+	const divs = await page.$$("#dropzone > div")
+	
+	for (const div of divs) {
+		await div.evaluate((element) => {
+			// Remover todas as classes do div
+			element.className = ""
+
+			// Adicionar as classes desejadas
+			element.classList.add("dz-preview", "image-linked", "ui-sortable-handle")
+			
+			// Mudar o valor do input
+			const input = element.querySelector("#ProdutoEstoqueProdutoImagemAtivo")
+			if (input) {
+				input.value = "1"
+			}
+		})
+	}
+
+	const selectBtnSubmit = ".box-footer button[type='submit']"
+	await handleClick(selectBtnSubmit, page)
+}
+
 async function changeImage(browser, page){
 	const rows = await page.$$("table.tabela-variacoes tbody tr")
 
@@ -111,6 +134,9 @@ async function changeImage(browser, page){
 			await newPage.evaluate(() => {
 				window.scrollTo(0, document.body.scrollHeight)
 			})
+
+			// Ativando todas as imagens
+			await updateDivElements(newPage)
 
 			await newPage.waitForNavigation()
 			
