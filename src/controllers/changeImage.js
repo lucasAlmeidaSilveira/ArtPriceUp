@@ -42,8 +42,12 @@ export async function loopForEachImage(page, browser){
 			// console.log(error)
 		}
 	}
+		
+	if (!btnNext) {
+		return
+	}
 
-	await page.waitForNavigation()
+	await handleClick(btnNext, page)
 	await loopForEachImage(page, browser)
 }
 
@@ -138,8 +142,6 @@ async function changeImage(browser, page){
 			// Ativando todas as imagens
 			await updateDivElements(newPage)
 
-			await newPage.waitForNavigation()
-			
 			await newPage.close()
 		} catch (error) {
 			// console.log(error)
