@@ -39,8 +39,7 @@ export async function findCategorie(page) {
 }
 
 export async function findValueInput(page, selector){
-	const selectorInput = await page.$(selector)
-	const valueInput = await page.evaluate((input) => input.value, selectorInput)
+	const valueInput = await page.$eval(selector, (element) => element.value)
 
 	return valueInput
 }
@@ -64,7 +63,7 @@ export async function findAmountFrames(page){
 	} else {
 		let number = value.match(/\d+/g)
 		if(!number) {
-			number = 1
+			number = "1"
 		}
 		return number
 	}
@@ -171,5 +170,11 @@ export async function closeAllPagesExceptFirst(browser) {
 	for (let i = 2; i < pages.length; i++) {
 		await pages[i].close()
 	}
+}
+
+export async function updateInputValue(page, selector, value) {
+	await page.$eval(selector, (element, val) => {
+		element.value = val
+	}, value)
 }
 

@@ -5,7 +5,8 @@
     "updateTitles": "node title.js",
     "updatePrices": "node price.js",
     "removeOption": "node remove.js",
-    "changeImages": "node changeImages.js"
+    "changeImages": "node changeImages.js",
+    "updateSKU": "node sku.js"
   },
   "dependencies": {
     "dotenv": "^16.0.3",
