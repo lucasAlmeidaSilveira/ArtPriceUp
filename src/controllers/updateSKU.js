@@ -1,11 +1,29 @@
-import { findAmountFrames, findValueInput, handleClick, updateInputValue } from "./tools.js"
+import { extractLastNumber, findAmountFrames, findValueInput, handleClick, updateInputValue } from "./tools.js"
 
 export async function updateSKU(page, browser){
 	const rows = await page.$$("table#tb-produtos tbody tr")
 	const btnNext = ".pagination .btn-next a"
 
+	// Dando o log do número da página que está ativa
+	const url = page.url()
+	let pageNumber = extractLastNumber(url)
+	if(pageNumber === null) {
+		pageNumber = "1"
+	}
+	console.log("Página:", pageNumber)
+
 	for (const row of rows) {
 		try {
+			// Verificando se o produto atual é espelho ou não
+			const selectNameProduct = "td .product-info .product-nome"
+			const nameProduct = await row.$eval(selectNameProduct, (span) => span.textContent.trim())
+			const regexEspelho = /espelho/i
+			const isMirror = regexEspelho.test(nameProduct)
+						
+			if(isMirror) {
+				continue
+			}
+
 			await editRow(row, browser)
 		} catch (error) {
 			// console.log(error)
@@ -32,6 +50,11 @@ async function openNewPage(link, browser) {
 	const newPage = await browser.newPage()
 	
 	await newPage.goto(link)
+
+	// DANDO O LOG DO PRODUTO QUE ESTÁ SENDO EDITADO
+	const selectInputName = "input#ProdutoNome"
+	const nameProduct = await newPage.$eval(selectInputName, (input) => input.value)
+	console.log(nameProduct)
 
 	// RECUPERANDO VALOR DO SKU
 	const selectInputSKU = "input#ProdutoSku"
