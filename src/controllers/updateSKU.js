@@ -145,13 +145,13 @@ function filterFrame(materialInput, sizeInput, frameInput) {
 	}
 
 	if(materialInput === "Canvas (Tela de pintura)"){
-		if(frameInput === "20-002") {
+		if(frameInput === "20-002" || frameInput === "Branca") {
 			return "CANALETA BRANCA"
 		}
-		if(frameInput === "20-001") {
+		if(frameInput === "20-001" || frameInput === "Preta") {
 			return "CANALETA PRETA"
 		}
-		if(frameInput === "0120-0208") {
+		if(frameInput === "0120-0208" || frameInput === "Marrom") {
 			return "CANALETA NATURAL"
 		}
 	}
