@@ -121,25 +121,25 @@ function updateProductSKU(
 
 function filterFrame(materialInput, sizeInput, frameInput) {
 	if(materialInput !== "Canvas (Tela de pintura)"){
-		if(sizeInput === "40cm x 60cm (10% OFF)" && frameInput === "20-002") {
+		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "20-002" || frameInput === "Branca")) {
 			return "RETA BRANCA"
 		}
-		if(sizeInput === "40cm x 60cm (10% OFF)" && frameInput === "20-001") {
+		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "20-001" || frameInput === "Preta")) {
 			return "RETA PRETA"
 		}
-		if(sizeInput === "40cm x 60cm (10% OFF)" && frameInput === "0120-0208") {
+		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "0120-0208" || frameInput === "Marrom")) {
 			return "RETA NATURAL"
 		}
 	}
 
 	if(materialInput !== "Canvas (Tela de pintura)"){
-		if(sizeInput !== "40cm x 60cm (10% OFF)" && frameInput === "20-002") {
+		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "20-002" || frameInput === "Branca")) {
 			return "CAIXA BRANCA"
 		}
-		if(sizeInput !== "40cm x 60cm (10% OFF)" && frameInput === "20-001") {
+		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "20-001" || frameInput === "Preta")) {
 			return "CAIXA PRETA"
 		}
-		if(sizeInput !== "40cm x 60cm (10% OFF)" && frameInput === "0120-0208") {
+		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "0120-0208" || frameInput === "Marrom")) {
 			return "CAIXA NATURAL"
 		}
 	}
