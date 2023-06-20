@@ -31,11 +31,18 @@ async function remove(browser, page, amountFrames) {
 			await row.$eval(("input.delete"), (input) => input.checked = true)
 		}
 		
-		if(amountFrames !== 1 || amountFrames !== "1") {
-			if(size === "150cm x 100cm" || frame === "Borda infinita") {
+		if(amountFrames === 2 || amountFrames === 3 || amountFrames === "2" || amountFrames === "3") {
+			if(size === "150cm x 100cm" || frame === "Borda infinita" || size === "120cm x 120cm") {
 				await row.$eval(("input.delete"), (input) => input.checked = true)
 			}			
 		}
+
+		if(amountFrames === 1 || amountFrames === "1") {
+			if(size === "40cm x 60cm (10% OFF)" || frame === "Borda infinita" || size === "50cm x 50cm") {
+				await row.$eval(("input.delete"), (input) => input.checked = true)
+			}			
+		}
+		
 	}
 
 	await new Promise((resolve) => setTimeout(resolve, 1000))

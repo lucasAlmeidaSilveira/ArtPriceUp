@@ -1,4 +1,4 @@
-import { sizeM, sizeP } from "../db/pricesFramesMaio.js"
+import { sizeM, sizeP, sizeG } from "../db/pricesFramesMaio.js"
 import { findAmountFrames, handleClick } from "./tools.js"
 
 const selectInputValue = "input#ProdutoEstoqueValorVenda"
@@ -91,19 +91,19 @@ export async function updateValueFrame(page, amountFrames) {
 
 	// Realiza a verificação do check box da promoção
 	await page.waitForSelector(checkBoxPromo)
-	const isChecked = await page.$eval(checkBoxPromo, (input) => input.checked)
+	// const isChecked = await page.$eval(checkBoxPromo, (input) => input.checked)
 	
-	// Saindo dos tamanhos de quadros que não farão alteração
-	const breakAction = sizeFrame === "60cm x 90cm (30% OFF)" || sizeFrame === "60cm x 90cm"
+	// // Saindo dos tamanhos de quadros que não farão alteração
+	// const breakAction = sizeFrame === "60cm x 90cm (30% OFF)" || sizeFrame === "60cm x 90cm"
 
-	if(!breakAction) {
-		if(isChecked) {
-			// Clique no check da promo
-			await handleClick(btnCancelPromo, page)
-		}
-		await page.close()
-		return
-	}
+	// if(!breakAction) {
+	// 	if(isChecked) {
+	// 		// Clique no check da promo
+	// 		await handleClick(btnCancelPromo, page)
+	// 	}
+	// 	await page.close()
+	// 	return
+	// }
 	
 	const isCheckedNew = await page.$eval(checkBoxPromo, (input) => input.checked)
 	
@@ -113,7 +113,7 @@ export async function updateValueFrame(page, amountFrames) {
 		await handleClick(checkBoxPromoManual, page)
 	}
 
-	// ATUALIZA VALOR DE DESCONTO
+	// ATUALIZA VALOR
 	await updateValuePromo(
 		sizeP,
 		typeFrame,
@@ -126,6 +126,16 @@ export async function updateValueFrame(page, amountFrames) {
 
 	await updateValuePromo(
 		sizeM,
+		typeFrame,
+		sizeFrame,
+		materialFrame,
+		selectorInputPrice,
+		amountFrames,
+		page
+	)
+
+	await updateValuePromo(
+		sizeG,
 		typeFrame,
 		sizeFrame,
 		materialFrame,
@@ -201,7 +211,7 @@ async function updateValuePromo(
 			(input, valor) => (input.value = valor), value)
 	}
 	
-	if (size.size.includes(sizeFrame) && materialFrame === "Canvas (Tela de pintura)" && typeFrame !== "Borda infinita") {
+	if (size.size.includes(sizeFrame) && materialFrame === "Canvas (Tela de pintura)") {
 		const value = size.material[3].variations[amountFrames - 1].value
 
 		await page.waitForSelector(selectorInputValue)

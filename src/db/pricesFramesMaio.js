@@ -41,7 +41,7 @@ export const sizeM = {
 		]},
 		{ type: "Quadro com vidro (Mais Vendido)", variations: [
 			{ amountFrames: "1", value: "399,00" },
-			{ amountFrames: "2", value: "799,00" },
+			{ amountFrames: "2", value: "799,00" },																	
 			{ amountFrames: "3", value: "799,00" }
 		]},
 		{ type: "Canaleta", variations: [
@@ -52,44 +52,54 @@ export const sizeM = {
 	]
 }
 
-// export const sizeG = {
-// 	size: "120cm x 80cm" || "90cm x 90cm",
-// 	material: [
-// 		{ type: "Canvas", variations: [
-// 			{ amountFrames: "1", value: "679,00" },
-// 			{ amountFrames: "2", value: "929,00" },
-// 			{ amountFrames: "3", value: "999,00" }
-// 		]},
-// 		{ type: "Quadro sem vidro", variations: [
-// 			{ amountFrames: "1", value: "769,00" },
-// 			{ amountFrames: "2", value: "999,00" },
-// 			{ amountFrames: "3", value: "1099,00" }
-// 		]},
-// 		{ type: "Quadro com vidro", variations: [
-// 			{ amountFrames: "1", value: "999,00" },
-// 			{ amountFrames: "2", value: "1599,00" },
-// 			{ amountFrames: "3", value: "1699,00" }
-// 		]}
-// 	]
-// }
+export const sizeG = {
+	size: ["120cm x 80cm", "90cm x 90cm", "90cm x 90cm (30% OFF)"],
+	material: [
+		{ type: "Canvas (Tela de pintura)", variations: [
+			{ amountFrames: "1", value: "679,00" },
+			{ amountFrames: "2", value: "929,00" },
+			{ amountFrames: "3", value: "999,00" }
+		]},
+		{ type: "Quadro sem vidro (Mais econômico)", variations: [
+			{ amountFrames: "1", value: "769,00" },
+			{ amountFrames: "2", value: "999,00" },
+			{ amountFrames: "3", value: "1099,00" }
+		]},
+		{ type: "Quadro com vidro (Mais Vendido)", variations: [
+			{ amountFrames: "1", value: "999,00" },
+			{ amountFrames: "2", value: "1599,00" },
+			{ amountFrames: "3", value: "1699,00" }
+		]},
+		{ type: "Canaleta", variations: [
+			{ amountFrames: "1", value: "979,00" },
+			{ amountFrames: "2", value: "1569,00" },
+			{ amountFrames: "3", value: "1669,00" }
+		]}
+	]
+}
 
-// export const sizeGG = {
-// 	size: "150cm x 100cm" || "120cm x 120cm",
-// 	material: [
-// 		{ type: "Canvas", variations: [
-// 			{ amountFrames: "1", value: "729,00" },
-// 			{ amountFrames: "2", value: "1099,00" },
-// 			{ amountFrames: "3", value: "1399,00" }
-// 		]},
-// 		{ type: "Quadro sem vidro", variations: [
-// 			{ amountFrames: "1", value: "839,00" },
-// 			{ amountFrames: "2", value: "1399,00" },
-// 			{ amountFrames: "3", value: "1549,00" }
-// 		]},
-// 		{ type: "Quadro com vidro", variations: [
-// 			{ amountFrames: "1", value: "999,00" },
-// 			{ amountFrames: "2", value: "1999,00" },
-// 			{ amountFrames: "3", value: "2299,00" }
-// 		]}
-// 	]
-// }
+export const sizeGG = {
+	size: ["150cm x 100cm", "120cm x 120cm"],
+	material: [
+		{ type: "Canvas (Tela de pintura)", variations: [
+			{ amountFrames: "1", value: "729,00" },
+			{ amountFrames: "2", value: "1099,00" },
+			{ amountFrames: "3", value: "1399,00" }
+		]},
+		{ type: "Quadro sem vidro (Mais econômico)", variations: [
+			{ amountFrames: "1", value: "839,00" },
+			{ amountFrames: "2", value: "1399,00" },
+			{ amountFrames: "3", value: "1549,00" }
+		]},
+		{ type: "Quadro com vidro (Mais Vendido)", variations: [
+			{ amountFrames: "1", value: "999,00" },
+			{ amountFrames: "2", value: "1999,00" },
+			{ amountFrames: "3", value: "2299,00" }
+		]},
+		{ type: "Canaleta", variations: [
+			{ amountFrames: "1", value: "979,00" },
+			{ amountFrames: "2", value: "1899,00" },
+			{ amountFrames: "3", value: "2279,00" }
+		]}
+	]
+}
