@@ -45,13 +45,6 @@ export async function findValueInput(page, selector){
 }
 
 export async function findAmountFrames(page){
-	// RECUPERANDO POR MEIO DO SKU | OLD 
-	// const selectInputSKU = "input#ProdutoSku"
-	// const amountFrames = await page.$eval(selectInputSKU, (input) => input.value)
-	// // const amountFrames = productSKU.slice(-1)
-
-	// return amountFrames
-
 	const selectInputName = "input#ProdutoNome"
 	const value = await page.$eval(selectInputName, (input) => input.value)
 	const regex = /Quadro Decorativo (\d+)/

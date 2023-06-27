@@ -6,6 +6,7 @@
     "updatePrices": "node price.js",
     "removeOption": "node remove.js",
     "changeImages": "node changeImages.js",
+    "updateMeasurements": "node measurements.js",
     "updateSKU": "node sku.js"
   },
   "dependencies": {
