@@ -98,6 +98,7 @@ async function updateAllSKU(page, SKU, amountFrames) {
 		)
 
 		await updateInputValue(row, selectInputSKU, newSKU)
+		await new Promise((resolve) => setTimeout(resolve, 500))
 	})
 }
 
@@ -122,18 +123,6 @@ function updateProductSKU(
 function filterFrame(materialInput, sizeInput, frameInput) {
 	if(materialInput !== "Canvas (Tela de pintura)"){
 		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "20-002" || frameInput === "Branca")) {
-			return "RETA BRANCA"
-		}
-		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "20-001" || frameInput === "Preta")) {
-			return "RETA PRETA"
-		}
-		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "0120-0208" || frameInput === "Marrom")) {
-			return "RETA NATURAL"
-		}
-	}
-
-	if(materialInput !== "Canvas (Tela de pintura)"){
-		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "20-002" || frameInput === "Branca")) {
 			return "CAIXA BRANCA"
 		}
 		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "20-001" || frameInput === "Preta")) {
@@ -141,6 +130,18 @@ function filterFrame(materialInput, sizeInput, frameInput) {
 		}
 		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "0120-0208" || frameInput === "Marrom")) {
 			return "CAIXA NATURAL"
+		}
+	}
+
+	if(materialInput !== "Canvas (Tela de pintura)"){
+		if((sizeInput === "40cm x 60cm (10% OFF)" || sizeInput === "50cm x 50cm") && (frameInput === "20-002" || frameInput === "Branca")) {
+			return "RETA BRANCA"
+		}
+		if((sizeInput === "40cm x 60cm (10% OFF)" || sizeInput === "50cm x 50cm") && (frameInput === "20-001" || frameInput === "Preta")) {
+			return "RETA PRETA"
+		}
+		if((sizeInput === "40cm x 60cm (10% OFF)" || sizeInput === "50cm x 50cm") && (frameInput === "0120-0208" || frameInput === "Marrom")) {
+			return "RETA NATURAL"
 		}
 	}
 
@@ -205,7 +206,7 @@ function createCodeSKU(
 	const materialCode = getCode("material", material)
 	const sizeCode = getCode("size", size)
 	const quantityCode = getCode("quantity", quantity)
-  
+
 	return `${code}${frameCode}-${materialCode}-${sizeCode}-${quantityCode}`
 }
 

@@ -172,8 +172,8 @@ export async function closeAllPagesExceptFirst(browser) {
 	}
 }
 
-export async function updateInputValue(page, selector, value) {
-	await page.$eval(selector, (element, val) => {
+export async function updateInputValue(row, selector, value) {
+	await row.$eval(selector, (element, val) => {
 		element.value = val
 	}, value)
 }
