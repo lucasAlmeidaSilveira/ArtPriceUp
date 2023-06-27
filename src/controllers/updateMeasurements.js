@@ -37,7 +37,7 @@ async function updateMeasurements(newPage, amountFrames){
 
 	const { width, height } = measurementsFrames[sizeFrame]
 
-	const weightFrame = 10
+	const weightFrame = 6
 	const heightFrame = height
 	const widthFrame = width
 	let lengthFrame = 0
