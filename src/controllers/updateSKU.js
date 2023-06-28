@@ -128,7 +128,7 @@ function filterFrame(materialInput, sizeInput, frameInput) {
 		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "20-001" || frameInput === "Preta")) {
 			return "CAIXA PRETA"
 		}
-		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "0120-0208" || frameInput === "Marrom")) {
+		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "0120-0208" || frameInput === "Natural")) {
 			return "CAIXA NATURAL"
 		}
 	}
@@ -140,7 +140,7 @@ function filterFrame(materialInput, sizeInput, frameInput) {
 		if((sizeInput === "40cm x 60cm (10% OFF)" || sizeInput === "50cm x 50cm") && (frameInput === "20-001" || frameInput === "Preta")) {
 			return "RETA PRETA"
 		}
-		if((sizeInput === "40cm x 60cm (10% OFF)" || sizeInput === "50cm x 50cm") && (frameInput === "0120-0208" || frameInput === "Marrom")) {
+		if((sizeInput === "40cm x 60cm (10% OFF)" || sizeInput === "50cm x 50cm") && (frameInput === "0120-0208" || frameInput === "Natural")) {
 			return "RETA NATURAL"
 		}
 	}
@@ -152,7 +152,7 @@ function filterFrame(materialInput, sizeInput, frameInput) {
 		if(frameInput === "20-001" || frameInput === "Preta") {
 			return "CANALETA PRETA"
 		}
-		if(frameInput === "0120-0208" || frameInput === "Marrom") {
+		if(frameInput === "0120-0208" || frameInput === "Natural") {
 			return "CANALETA NATURAL"
 		}
 	}
