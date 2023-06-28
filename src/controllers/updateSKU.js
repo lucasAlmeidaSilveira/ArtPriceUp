@@ -122,37 +122,37 @@ function updateProductSKU(
 
 function filterFrame(materialInput, sizeInput, frameInput) {
 	if(materialInput !== "Canvas (Tela de pintura)"){
-		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "20-002" || frameInput === "Branca")) {
+		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "Branca")) {
 			return "CAIXA BRANCA"
 		}
-		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "20-001" || frameInput === "Preta")) {
+		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "Preta")) {
 			return "CAIXA PRETA"
 		}
-		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "0120-0208" || frameInput === "Natural")) {
+		if(sizeInput !== "40cm x 60cm (10% OFF)" && (frameInput === "Natural")) {
 			return "CAIXA NATURAL"
 		}
 	}
 
 	if(materialInput !== "Canvas (Tela de pintura)"){
-		if((sizeInput === "40cm x 60cm (10% OFF)" || sizeInput === "50cm x 50cm") && (frameInput === "20-002" || frameInput === "Branca")) {
+		if((sizeInput === "40cm x 60cm (10% OFF)" || sizeInput === "50cm x 50cm") && (frameInput === "Branca")) {
 			return "RETA BRANCA"
 		}
-		if((sizeInput === "40cm x 60cm (10% OFF)" || sizeInput === "50cm x 50cm") && (frameInput === "20-001" || frameInput === "Preta")) {
+		if((sizeInput === "40cm x 60cm (10% OFF)" || sizeInput === "50cm x 50cm") && (frameInput === "Preta")) {
 			return "RETA PRETA"
 		}
-		if((sizeInput === "40cm x 60cm (10% OFF)" || sizeInput === "50cm x 50cm") && (frameInput === "0120-0208" || frameInput === "Natural")) {
+		if((sizeInput === "40cm x 60cm (10% OFF)" || sizeInput === "50cm x 50cm") && (frameInput === "Natural")) {
 			return "RETA NATURAL"
 		}
 	}
 
 	if(materialInput === "Canvas (Tela de pintura)"){
-		if(frameInput === "20-002" || frameInput === "Branca") {
+		if(frameInput === "Branca") {
 			return "CANALETA BRANCA"
 		}
-		if(frameInput === "20-001" || frameInput === "Preta") {
+		if(frameInput === "Preta") {
 			return "CANALETA PRETA"
 		}
-		if(frameInput === "0120-0208" || frameInput === "Natural") {
+		if(frameInput === "Natural") {
 			return "CANALETA NATURAL"
 		}
 	}
