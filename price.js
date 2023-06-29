@@ -25,16 +25,19 @@ async function login(page) {
 	await pages[0].close()
 	
 	const URLpainel = process.env.URLPAINEL
-	// const URLproducts = process.env.URLPRODUTOS
-	// const btnVariacoes = "a#ui-id-6"
-	// const contador = 1
 
 	await page.goto(URLpainel);
 	(await page.url()) !== URLpainel ? await login(page) : "" // \n
 
 	try {
-		// Esperar pela página de catálogo de produtos
-		await waitForURL(page, "produtos")
+		const pageProducts = process.argv[2]
+		
+		if(pageProducts) {
+			await page.goto(`https://www.outletdosquadros.com.br/painel/catalogo/produtos/index/page:${pageProducts}`)
+		} else {
+			// Esperar pela página de catálogo de produtos
+			await waitForURL(page, "produtos")
+		}
 
 		// ATUALIZAR VALORES
 		await loopForEach(page, browser, forEachVariations)
