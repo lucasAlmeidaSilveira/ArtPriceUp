@@ -207,7 +207,7 @@ function createCodeSKU(
 	const sizeCode = getCode("size", size)
 	const quantityCode = getCode("quantity", quantity)
 
-	return `${code}${frameCode}-${materialCode}-${sizeCode}-${quantityCode}`
+	return `OT${code}${frameCode}-${materialCode}-${sizeCode}-${quantityCode}`
 }
 
 
