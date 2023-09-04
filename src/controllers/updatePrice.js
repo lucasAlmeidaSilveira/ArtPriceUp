@@ -1,4 +1,4 @@
-import { sizeM, sizeP, sizeG } from "../db/pricesFramesMaio.js"
+import { sizeM, sizeP, sizeG, sizeGG } from "../db/pricesFramesMaio.js"
 import { findAmountFrames, handleClick } from "./tools.js"
 
 const selectInputValue = "input#ProdutoEstoqueValorVenda"
@@ -30,7 +30,7 @@ export async function updateValueDefault(page, checkBoxPromo) {
 		(input) => (input.value = "23/02/2023"))
 
 	// Atualiza valor data de fim da promoção
-	await page.$eval(selectInputEndPromo, (input) => (input.value = "01/01/2024"))
+	await page.$eval(selectInputEndPromo, (input) => (input.value = "01/01/2034"))
 }
 
 export async function clickDatePromoAutomatic(page){
@@ -106,11 +106,14 @@ export async function updateValueFrame(page, amountFrames) {
 	// }
 	
 	const isCheckedNew = await page.$eval(checkBoxPromo, (input) => input.checked)
+
+	console.log(isCheckedNew)
 	
 	if(isCheckedNew === false){
 		// Ativação da promoção
 		await handleClick(checkBoxPromo, page)
 		await handleClick(checkBoxPromoManual, page)
+		console.log(isCheckedNew)
 	}
 
 	// ATUALIZA VALOR
@@ -136,6 +139,16 @@ export async function updateValueFrame(page, amountFrames) {
 
 	await updateValuePromo(
 		sizeG,
+		typeFrame,
+		sizeFrame,
+		materialFrame,
+		selectorInputPrice,
+		amountFrames,
+		page
+	)
+
+	await updateValuePromo(
+		sizeGG,
 		typeFrame,
 		sizeFrame,
 		materialFrame,
@@ -194,6 +207,13 @@ async function updateValuePromo(
 	// 	await page.$eval(selectorInputValue,
 	// 		(input, valor) => (input.value = valor), value)
 	// }
+	if (size.size.includes(sizeFrame) && materialFrame === "Canvas (Tela de pintura)") {
+		const value = size.material[0].variations[amountFrames - 1].value
+
+		await page.waitForSelector(selectorInputValue)
+		await page.$eval(selectorInputValue,
+			(input, valor) => (input.value = valor), value)
+	}
 
 	if (size.size.includes(sizeFrame) && materialFrame === size.material[1].type) {
 		const value = size.material[1].variations[amountFrames - 1].value
@@ -211,13 +231,6 @@ async function updateValuePromo(
 			(input, valor) => (input.value = valor), value)
 	}
 	
-	if (size.size.includes(sizeFrame) && materialFrame === "Canvas (Tela de pintura)") {
-		const value = size.material[3].variations[amountFrames - 1].value
-
-		await page.waitForSelector(selectorInputValue)
-		await page.$eval(selectorInputValue,
-			(input, valor) => (input.value = valor), value)
-	}
 }
 
 export async function updateValueSize(

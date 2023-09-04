@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "dotenv": "^16.0.3",
-    "eslint-config-lasilveira": "^1.0.4",
+    "eslint-config-lasilveira": "^1.1.6",
     "puppeteer": "^19.7.2"
   },
   "devDependencies": {

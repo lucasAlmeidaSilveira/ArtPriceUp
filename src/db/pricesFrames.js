@@ -1,5 +1,5 @@
 export const sizeP = {
-	size: "40cm x 60cm" || "50cm x 50cm",
+	size: ["40cm x 60cm" || "50cm x 50cm"],
 	material: [
 		{ type: "Canvas", variations: [
 			{ type: "Único", value: "0,00" },
@@ -20,7 +20,7 @@ export const sizeP = {
 }
 
 export const sizeM = {
-	size: "60cm x 90cm" || "60cm x 90cm (30% OFF)" || "70cm x 70cm",
+	size: ["60cm x 90cm" || "60cm x 90cm (30% OFF)" || "70cm x 70cm"],
 	material: [
 		{ type: "Canvas", variations: [
 			{ type: "Único", value: "559,00" },
@@ -41,7 +41,7 @@ export const sizeM = {
 }
 
 export const sizeG = {
-	size: "120cm x 80cm" || "90cm x 90cm",
+	size: ["120cm x 80cm" || "90cm x 90cm"],
 	material: [
 		{ type: "Canvas", variations: [
 			{ type: "Único", value: "679,00" },
@@ -62,7 +62,7 @@ export const sizeG = {
 }
 
 export const sizeGG = {
-	size: "150cm x 100cm" || "120cm x 120cm",
+	size: ["150cm x 100cm" || "120cm x 120cm"],
 	material: [
 		{ type: "Canvas", variations: [
 			{ type: "Único", value: "729,00" },

@@ -9,7 +9,7 @@ dotenv.config()
 async function login(page) {
 	/* Dados de acesso */
 	await page.type("#user", process.env.USER)
-	await page.type("#senha", process.env.PASS)
+	// await page.type("#senha", process.env.PASS)
 	/* Dados de acesso */
 
 	await page.click(".form-field > #do-login")
@@ -31,6 +31,7 @@ async function login(page) {
 
 	try {
 		const pageProducts = process.argv[2]
+		await page.waitForNavigation()
 		
 		if(pageProducts) {
 			await page.goto(`https://www.outletdosquadros.com.br/painel/catalogo/produtos/index/page:${pageProducts}`)

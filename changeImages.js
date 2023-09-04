@@ -9,10 +9,10 @@ dotenv.config()
 async function login(page) {
 	/* Dados de acesso */
 	await page.type("#user", process.env.USER)
-	await page.type("#senha", process.env.PASS)
+	// await page.type("#senha", process.env.PASS)
 	/* Dados de acesso */
 
-	await page.click(".form-field > #do-login")
+	// await page.click(".form-field > #do-login")
 
 	await page.waitForNavigation()
 }

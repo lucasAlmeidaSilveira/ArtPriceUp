@@ -149,7 +149,7 @@ export async function openNewPage(link, browser, action) {
 	// Clique nas variações
 	const btnVariacoes = "a#ui-id-6"
 	await handleClick(btnVariacoes, newPage)
-	if(amountFrames === "2" || amountFrames === "3") {
+	if(amountFrames === "1" || amountFrames === "2" || amountFrames === "3") {
 		await action(browser, newPage, amountFrames)
 	}
   
