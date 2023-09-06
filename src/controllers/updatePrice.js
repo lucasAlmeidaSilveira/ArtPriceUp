@@ -107,13 +107,10 @@ export async function updateValueFrame(page, amountFrames) {
 	
 	const isCheckedNew = await page.$eval(checkBoxPromo, (input) => input.checked)
 
-	console.log(isCheckedNew)
-	
 	if(isCheckedNew === false){
 		// Ativação da promoção
 		await handleClick(checkBoxPromo, page)
 		await handleClick(checkBoxPromoManual, page)
-		console.log(isCheckedNew)
 	}
 
 	// ATUALIZA VALOR
