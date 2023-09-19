@@ -1,4 +1,4 @@
-import { sizeM, sizeP, sizeG, sizeGG } from "../db/pricesFramesMaio.js"
+import { sizeM, sizeP, sizeG, sizeGG } from "../db/pricesFrames.js"
 import { findAmountFrames, handleClick } from "./tools.js"
 
 const selectInputValue = "input#ProdutoEstoqueValorVenda"
