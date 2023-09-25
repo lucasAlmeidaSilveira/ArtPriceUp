@@ -143,13 +143,14 @@ function updateProductPricePercent(amountFrames, materialInputValue, sizeInputVa
 			const priceString = variation.value.replace(",", ".")
 			const price = parseFloat(priceString)
 
-			let pricePercent = (price * 1.1).toFixed(2)
+			let pricePercent
 
 			if(sizeInputValue.includes("30% OFF")) {
 				pricePercent = (price * 1.3).toFixed(2)
+			} else {
+				pricePercent = (price * 1.1).toFixed(2)
 			}
 			
-			console.log(pricePercent)                                                                                                                                                                                                                                                                                                                                                                                                    
 			return pricePercent
 		}
 	}
