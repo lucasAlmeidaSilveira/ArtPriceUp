@@ -4,6 +4,7 @@
   "scripts": {
     "updateTitles": "node title.js",
     "updatePrices": "node price.js",
+    "updatePricePercent": "node pricePercent.js",
     "removeOption": "node remove.js",
     "changeImages": "node changeImages.js",
     "updateMeasurements": "node measurements.js",
